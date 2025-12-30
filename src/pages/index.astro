@@ -125,12 +125,12 @@ const techGroups = [
     
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-fit px-4">
         <ul class="flex items-center gap-1 md:gap-4 px-5 py-3 rounded-full bg-neutral-900/90 backdrop-blur-md border border-neutral-800 shadow-2xl overflow-x-auto no-scrollbar whitespace-nowrap">
-            <li><a href="#portofolio" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">PORTOFOLIO</a></li>
-            <li><a href="#business" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-green-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">BISNIS</a></li>
-            <li><a href="#career" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">KARIR</a></li>
-            <li><a href="#education" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-blue-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">PENDIDIKAN</a></li>
-            <li><a href="#certs" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-yellow-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">SERTIFIKASI</a></li>
-            <li><a href="#tech" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-purple-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">KEAHLIAN</a></li>
+            <li><a href="#portofolio" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all uppercase">Portofolio</a></li>
+            <li><a href="#business" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-green-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all uppercase">Bisnis</a></li>
+            <li><a href="#career" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all uppercase">Karir</a></li>
+            <li><a href="#education" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-blue-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all uppercase">Pendidikan</a></li>
+            <li><a href="#certs" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-yellow-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all uppercase">Sertifikasi</a></li>
+            <li><a href="#tech" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-purple-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all uppercase">Keahlian</a></li>
         </ul>
     </nav>
 
@@ -141,32 +141,45 @@ const techGroups = [
 
         <div class="max-w-4xl w-full z-10 space-y-32 pt-32">
             
-            <section class="space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/50 backdrop-blur-md">
-                    <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
-                    <span class="text-xs font-tech tracking-widest text-cyan-500 uppercase">System Online</span>
+            <section class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+                <div class="relative w-32 h-32 md:w-48 md:h-48 shrink-0 group">
+                    <div class="absolute inset-0 bg-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                    <div class="relative w-full h-full rounded-2xl border-2 border-neutral-800 bg-neutral-900 overflow-hidden group-hover:border-cyan-500/50 transition-colors duration-500">
+                        <img 
+                            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ridwan" 
+                            alt="Ridwan Maulana Profil"
+                            class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500"
+                        />
+                    </div>
                 </div>
-                
-                <h1 class="text-4xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-                    Hai! Saya, <br />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-                        Ridwan Maulana, S.Kom.
-                    </span>
-                </h1>
-                
-                <p class="text-lg text-neutral-400 max-w-2xl leading-relaxed border-l-2 border-neutral-800 pl-6">
-                    Saya seorang <strong>Web & Android Developer</strong> sekaligus <strong>Guru Informatika</strong>. 
-                    Membangun ekosistem digital yang presisi, aman, dan inovatif.
-                </p>
 
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="https://wa.me/6285860565852" target="_blank" class="group relative px-6 py-3 bg-white text-black font-semibold rounded-lg overflow-hidden flex items-center gap-2">
-                        <div class="absolute inset-0 w-full h-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg"></div>
-                        <span class="relative z-10">WhatsApp Saya</span>
-                    </a>
-                    <a href="mailto:rmfhdofficial@gmail.com" class="px-6 py-3 border border-neutral-800 text-neutral-300 rounded-lg hover:border-neutral-500 hover:text-white transition-colors">
-                        Email Saya
-                    </a>
+                <div class="space-y-6 flex-grow">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/50 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+                        <span class="text-xs font-tech tracking-widest text-cyan-500 uppercase">System Online</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]">
+                        Hai! Saya, <br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                            Ridwan Maulana, S.Kom.
+                        </span>
+                    </h1>
+                    
+                    <p class="text-lg text-neutral-400 max-w-2xl leading-relaxed border-l-2 border-neutral-800 pl-6">
+                        Saya seorang <strong>Web & Android Developer</strong> sekaligus <strong>Guru Informatika</strong>. 
+                        Membangun ekosistem digital yang presisi, aman, dan inovatif.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="https://wa.me/6285860565852" target="_blank" class="group relative px-6 py-3 bg-white text-black font-semibold rounded-lg overflow-hidden flex items-center gap-2">
+                            <div class="absolute inset-0 w-full h-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg"></div>
+                            <span class="relative z-10">WhatsApp Saya</span>
+                        </a>
+                        <a href="mailto:rmfhdofficial@gmail.com" class="px-6 py-3 border border-neutral-800 text-neutral-300 rounded-lg hover:border-neutral-500 hover:text-white transition-colors">
+                            Email Saya
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -176,7 +189,6 @@ const techGroups = [
                         <h2 class="text-2xl font-bold text-white font-tech">01 // PORTOFOLIO</h2>
                         <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                     </div>
-                    
                     <h3 class="text-sm font-mono text-cyan-500 uppercase tracking-widest pl-1">>> 1.1 PROYEK SOFTWARE</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {webProjects.map((project) => {
@@ -202,7 +214,6 @@ const techGroups = [
                         })}
                     </div>
                 </div>
-
                 <div class="space-y-6">
                     <h3 class="text-sm font-mono text-purple-500 uppercase tracking-widest pl-1">>> 1.2 PROYEK AI</h3>
                     <div class="grid grid-cols-1 gap-6">
@@ -370,7 +381,6 @@ const techGroups = [
 </Layout>
 
 <style>
-    /* Menyembunyikan scrollbar navigasi agar tetap bersih */
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }
