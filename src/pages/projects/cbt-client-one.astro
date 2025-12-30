@@ -6,28 +6,29 @@ import { Image } from 'astro:assets';
 // Path gambar disamakan dulu agar tidak error
 import serverDashboard from '../../assets/cbt-client-one/server/dashboard.png';
 import serverSiswa from '../../assets/cbt-client-one/server/siswa.png';
-import serverSekolah from '../../assets/cbt-client-one/server/soal.png';
+import serverSoal from '../../assets/cbt-client-one/server/soal.png';
 import serverUjian from '../../assets/cbt-client-one/server/ujian.png';
 
 // Client Assets
-import clientAbsensi from '../../assets/absensi-one/client/absensi.jpg';
-import clientFaceDetection from '../../assets/absensi-one/client/facedetection.jpg';
-import clientRiwayat from '../../assets/absensi-one/client/riwayat.jpg';
-import clientProfil from '../../assets/absensi-one/client/profil.jpg';
+import clientBeranda from '../../assets/cbt-client-one/client/beranda.jpg';
+import clientSoal from '../../assets/cbt-client-one/client/soal.jpg';
+import clientUjian from '../../assets/cbt-client-one/client/ujian.jpg';
+import clientProfil from '../../assets/cbt-client-one/client/profil.jpg';
 
 // Data Array Server (Judul disesuaikan untuk konteks CBT tapi gambar masih Absensi)
 const serverGallery = [
-  { img: serverSiswa, title: "Manajemen Peserta Ujian" },
-  { img: serverSekolah, title: "Bank Soal & Jadwal" },
-  { img: serverUjian, title: "Monitoring Ujian Realtime" },
+  { img: serverDashboard, title: "Dashboard" },
+  { img: serverSiswa, title: "Data Siswa" },
+  { img: serverSoal, title: "Data Soal" },
+  { img: serverUjian, title: "Data Ujian" },
 ];
 
 // Data Array Client
 const clientGallery = [
-  { img: clientAbsensi, title: "Login Peserta" },
-  { img: clientFaceDetection, title: "Ujian (Locked Mode)" },
-  { img: clientRiwayat, title: "Token Ujian" },
-  { img: clientProfil, title: "Hasil Sementara" },
+  { img: clientBeranda, title: "Beranda" },
+  { img: clientSoal, title: "Daftar Soal" },
+  { img: clientUjian, title: "Ujian (Kiosk Lock Mode)" },
+  { img: clientProfil, title: "Profil Pengguna" },
 ];
 ---
 
