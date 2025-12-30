@@ -123,14 +123,14 @@ const techGroups = [
 
 <Layout title="Ridwan Maulana, S.Kom. | Portofolio">
     
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto">
-        <ul class="flex items-center justify-center gap-1 md:gap-6 px-4 py-3 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 shadow-[0_0_15px_rgba(0,0,0,0.5)] overflow-x-auto no-scrollbar">
-            <li><a href="#portofolio" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">PORTOFOLIO</a></li>
-            <li><a href="#business" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-green-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">BISNIS</a></li>
-            <li><a href="#career" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">KARIR</a></li>
-            <li><a href="#education" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-blue-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">PENDIDIKAN</a></li>
-            <li><a href="#certs" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-yellow-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">SERTIFIKASI</a></li>
-            <li><a href="#tech" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-purple-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">KEAHLIAN</a></li>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-fit px-4">
+        <ul class="flex items-center gap-1 md:gap-4 px-5 py-3 rounded-full bg-neutral-900/90 backdrop-blur-md border border-neutral-800 shadow-2xl overflow-x-auto no-scrollbar whitespace-nowrap">
+            <li><a href="#portofolio" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">PORTOFOLIO</a></li>
+            <li><a href="#business" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-green-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">BISNIS</a></li>
+            <li><a href="#career" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">KARIR</a></li>
+            <li><a href="#education" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-blue-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">PENDIDIKAN</a></li>
+            <li><a href="#certs" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-yellow-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">SERTIFIKASI</a></li>
+            <li><a href="#tech" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-purple-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all">KEAHLIAN</a></li>
         </ul>
     </nav>
 
@@ -288,7 +288,7 @@ const techGroups = [
                         <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                     </div>
                     
-                    <h3 class="text-sm font-mono text-yellow-500 uppercase tracking-widest pl-1">>> 5.1 SERTIFIKASI PROFESI</h3>
+                    <h3 class="text-sm font-mono text-yellow-500 uppercase tracking-widest pl-1">>> 5.1 SERTIFIKASI PROFESI (BNSP)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {certificates.map((cert) => (
                             <div class="p-4 rounded border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-800/50 hover:border-yellow-500/30 transition-all group">
@@ -368,6 +368,17 @@ const techGroups = [
         </button>
     </main>
 </Layout>
+
+<style>
+    /* Menyembunyikan scrollbar navigasi agar tetap bersih */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
 
 <script>
     const backToTopBtn = document.getElementById('backToTop');
