@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Absensi One | Detail Proyek">
+    <main class="min-h-screen flex flex-col items-center px-6 relative overflow-hidden bg-neutral-950 text-neutral-300 selection:bg-cyan-500/30 pb-32">
+        
+        <div class="fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div class="fixed inset-0 z-0 bg-[radial-gradient(circle_800px_at_50%_-30%,#1e1e2e,transparent)]"></div>
+
+        <div class="max-w-5xl w-full z-10 space-y-12 pt-12 md:pt-24">
+            
+            <a href="/" class="inline-flex items-center gap-2 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group font-mono">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                KEMBALI KE BERANDA
+            </a>
+
+            <div class="space-y-4 border-b border-neutral-800 pb-8">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/10 text-xs font-mono text-cyan-400">
+                        IOT / WEB APP
+                    </span>
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="text-xs text-green-500 font-mono tracking-widest">SIAP DIPAKAI</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight">Absensi One</h1>
+                <p class="text-xl text-neutral-400 max-w-2xl">Sistem presensi modern berbasis Geo-Location & Face Recognition dengan akurasi tinggi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <div class="lg:col-span-2 space-y-10">
+                    
+                    <section class="space-y-4">
+                        <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
+                            <span class="w-1 h-6 bg-cyan-500 rounded-full"></span>
+                            DESKRIPSI PROYEK
+                        </h2>
+                        <p class="leading-relaxed text-neutral-400">
+                            Absensi One adalah solusi lengkap untuk manajemen kehadiran karyawan atau siswa. Aplikasi ini mengatasi masalah titip absen dengan memvalidasi lokasi GPS (Geofencing) dan Wajah (Face Recognition) secara real-time. 
+                            <br><br>
+                            Dilengkapi dengan dashboard admin yang powerful untuk merekap data harian, bulanan, hingga menghitung keterlambatan secara otomatis.
+                        </p>
+                    </section>
+
+                    <section class="space-y-8">
+                        <div class="space-y-3">
+                            <h3 class="text-sm font-mono text-neutral-500 uppercase tracking-widest">>> 2. TAMPILAN SERVER / BACKEND</h3>
+                            <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all">
+                                <img src="https://placehold.co/800x450/1e1e2e/FFF?text=Screenshot+Backend+Laravel+Dashboard" alt="Backend Dashboard" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h3 class="text-sm font-mono text-neutral-500 uppercase tracking-widest">>> 3. TAMPILAN CLIENT / FRONTEND</h3>
+                            <div class="flex gap-4 overflow-x-auto pb-2">
+                                <div class="w-[200px] flex-shrink-0 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all">
+                                    <img src="https://placehold.co/360x640/1e1e2e/FFF?text=Mobile+Login" alt="Mobile App" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                                </div>
+                                <div class="w-[200px] flex-shrink-0 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all">
+                                    <img src="https://placehold.co/360x640/1e1e2e/FFF?text=Face+Scan" alt="Mobile App" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <div class="space-y-8">
+                    
+                    <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm">
+                        <h3 class="text-sm font-bold text-white font-tech mb-6 uppercase tracking-wider">4. TEKNOLOGI</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <div class="text-xs text-neutral-500 font-mono mb-2">4.1 SERVER / BACKEND</div>
+                                <div class="flex items-center gap-3">
+                                    <span class="p-2 bg-red-500/10 rounded-lg border border-red-500/20 text-red-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                                    </span>
+                                    <span class="text-lg font-bold text-white">Laravel</span>
+                                </div>
+                            </div>
+                            
+                            <div class="w-full h-[1px] bg-neutral-800"></div>
+
+                            <div>
+                                <div class="text-xs text-neutral-500 font-mono mb-2">4.2 CLIENT / FRONTEND</div>
+                                <div class="flex items-center gap-3">
+                                    <span class="p-2 bg-blue-500/10 rounded-lg border border-blue-500/20 text-blue-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                                    </span>
+                                    <span class="text-lg font-bold text-white">Flutter</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-900/10 to-neutral-900/50 relative overflow-hidden group">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/20 rounded-full blur-[50px] group-hover:bg-cyan-500/30 transition-all"></div>
+
+                        <h3 class="text-sm font-bold text-cyan-400 font-tech mb-4 uppercase tracking-wider relative z-10">PENAWARAN SPESIAL</h3>
+                        
+                        <div class="space-y-1 mb-6 relative z-10">
+                            <div class="text-sm text-red-400 line-through decoration-red-500/50 font-mono">Rp 5.000.000</div>
+                            <div class="text-3xl md:text-4xl font-bold text-white">Rp 1.000.000</div>
+                            <div class="text-xs text-neutral-500">*Source Code Full + Panduan</div>
+                        </div>
+
+                        <div class="space-y-3 relative z-10">
+                            <a href="#" class="block w-full py-4 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-center rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]">
+                                LIHAT DEMO
+                            </a>
+                            <a href="https://wa.me/6285860565852?text=Halo,%20saya%20tertarik%20dengan%20source%20code%20Absensi%20One" class="block w-full py-4 border border-neutral-700 hover:border-white text-neutral-300 hover:text-white font-bold text-center rounded-xl transition-all">
+                                BELI SEKARANG
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+</Layout>
