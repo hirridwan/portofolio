@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// --- DATA: PORTFOLIO (DEV) ---
+// --- 1. DATA: PORTOFOLIO (DEV) ---
 const webProjects = [
   { 
     title: "Absensi One", 
@@ -20,7 +20,7 @@ const webProjects = [
   },
 ];
 
-// --- DATA: PORTFOLIO (AI) ---
+// --- 2. DATA: PORTOFOLIO (AI) ---
 const aiProjects = [
   { 
     title: "AI KDRAMA", 
@@ -29,7 +29,7 @@ const aiProjects = [
   },
 ];
 
-// --- DATA: BISNIS ---
+// --- 3. DATA: BISNIS ---
 const business = [
   { 
     title: "One Computer", 
@@ -38,7 +38,7 @@ const business = [
   },
 ];
 
-// --- DATA: RIWAYAT KARIR ---
+// --- 4. DATA: RIWAYAT KARIR ---
 const experience = [
   {
     period: "2025 — SEKARANG",
@@ -60,7 +60,7 @@ const experience = [
   }
 ];
 
-// --- DATA: SERTIFIKASI BNSP ---
+// --- 5. DATA: SERTIFIKASI BNSP ---
 const certificates = [
   "Junior Web Developer",
   "Analyst Program",
@@ -68,9 +68,28 @@ const certificates = [
   "Junior Office Operator"
 ];
 
-// --- DATA: TECH STACK / KEAHLIAN ---
-const techStack = [
-  "Laravel", "Astro", "React", "Tailwind CSS", "Android Kotlin", "Python AI", "Linux Server", "Cloudflare"
+// --- 6. DATA: KEAHLIAN (KATEGORI BARU) ---
+const techGroups = [
+  {
+    category: "MULTI-PLATFORM DEV",
+    desc: "Pengembangan Aplikasi Web & Mobile.",
+    skills: ["Laravel (PHP)", "Flutter (Mobile)", "Astro Framework", "Bootstrap", "REST API"]
+  },
+  {
+    category: "INFRASTRUCTURE",
+    desc: "Manajemen Server & Jaringan.",
+    skills: ["Linux Server", "Cloudflare Ecosystem", "Networking (LAN/WiFi)", "Web Security"]
+  },
+  {
+    category: "HARDWARE & SUPPORT",
+    desc: "Teknis Perangkat Keras Komputer.",
+    skills: ["PC Assembly / Build", "Hardware Troubleshooting", "Maintenance System"]
+  },
+  {
+    category: "FUTURE TECH",
+    desc: "Kecerdasan Buatan & Data.",
+    skills: ["Python (Basic)", "Prompt Engineering", "AI Integration"]
+  }
 ];
 ---
 
@@ -242,14 +261,30 @@ const techStack = [
 
             <section id="tech" class="scroll-mt-32">
                 <div class="flex items-center gap-4 mb-8">
-                    <h2 class="text-2xl font-bold text-white font-tech">05 // KEAHLIAN SAYA</h2>
+                    <h2 class="text-2xl font-bold text-white font-tech">05 // KEAHLIAN & SPESIALISASI</h2>
                     <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 </div>
-                <div class="flex flex-wrap gap-3">
-                    {techStack.map(tech => (
-                        <span class="px-4 py-2 bg-neutral-900 border border-neutral-800 rounded text-sm text-neutral-400 font-mono hover:border-purple-500/50 hover:text-purple-400 transition-colors cursor-default">
-                            {tech}
-                        </span>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {techGroups.map((group) => (
+                        <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20 hover:border-cyan-500/30 hover:bg-neutral-900/40 transition-all group">
+                            
+                            <div class="mb-4">
+                                <h3 class="text-base font-bold text-white font-mono tracking-wider flex items-center gap-2 mb-1 group-hover:text-cyan-400 transition-colors">
+                                    <span class="w-1.5 h-4 bg-cyan-500 rounded-sm"></span>
+                                    {group.category}
+                                </h3>
+                                <p class="text-xs text-neutral-500 ml-3.5">{group.desc}</p>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 ml-3.5">
+                                {group.skills.map(skill => (
+                                    <span class="px-3 py-1 bg-black/50 border border-neutral-800 rounded text-[11px] text-neutral-400 font-mono hover:text-white hover:border-cyan-500/50 hover:bg-cyan-900/10 transition-colors cursor-default">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
             </section>
