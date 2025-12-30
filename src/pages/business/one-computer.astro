@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-// --- DATA PRICELIST (Disinkronkan 100%) ---
+// DATA PRICELIST (Format Harga disesuaikan: "Rp 100k" / "Rp 3.5jt")
 
 // 1. Penjualan Unit
 const unitProducts = [
@@ -15,30 +15,49 @@ const unitProducts = [
 
 // 2. Aksesoris & Sparepart
 const spareparts = [
-  { name: "Mouse Wired / Wireless", price: "Rp 30rb – 250rb" },
-  { name: "Keyboard Std / Gaming", price: "Rp 60rb – 800rb" },
-  { name: "SSD 256GB – 1TB", price: "Rp 350rb – 1.8jt" },
-  { name: "RAM DDR4 8GB", price: "Rp 300rb – 450rb" },
-  { name: "Harddisk Int / Ext", price: "Rp 500rb – 1.5jt" },
-  { name: "Charger Laptop", price: "Rp 150rb – 450rb" },
+  { name: "Mouse Wired / Wireless", price: "Rp 30k – 250k" },
+  { name: "Keyboard Std / Gaming", price: "Rp 60k – 800k" },
+  { name: "SSD 256GB – 1TB", price: "Rp 350k – 1.8jt" },
+  { name: "RAM DDR4 8GB", price: "Rp 300k – 450k" },
+  { name: "Harddisk Int / Ext", price: "Rp 500k – 1.5jt" },
+  { name: "Charger Laptop", price: "Rp 150k – 450k" },
+];
+
+// 3. Service Data (Manual Render di bawah untuk pemisahan kategori)
+// A. Service Langsung
+const serviceDirect = [
+    { name: "Service Ringan & Cleaning", price: "Rp 100k – 250k" },
+    { name: "Ganti Pasta Prosesor", price: "Rp 100k – 200k" },
+    { name: "Instal Ulang Windows", price: "Rp 150k – 300k" },
+    { name: "Instal Microsoft Office", price: "Rp 100k – 200k" },
+    { name: "Perbaikan Hardware Ringan", price: "Rp 200k – 800k" },
+];
+
+// B. Remote
+const serviceRemote = [
+    { name: "Remote Troubleshooting", price: "Rp 25k" },
+    { name: "Remote Maintenance", price: "Rp 50k – 100k" },
+    { name: "Instal Aplikasi & Setting", price: "Rp 50k – 75k" },
+    { name: "Optimasi Software", price: "Rp 50k" },
+    { name: "Paket Bulanan (1-5 PC)", price: "Rp 200k – 400k" },
 ];
 
 // 4. Upgrade & Rakit PC
 const upgradeRakitPricelist = [
-  { name: "Upgrade RAM / SSD (jasa)", price: "100rb – 250rb" },
-  { name: "Upgrade VGA/PSU/MB (jasa)", price: "100rb – 500rb" },
-  { name: "Rakit PC Standard", price: "100rb – 400rb" },
-  { name: "Rakit PC Gaming / Custom", price: "400rb – 750rb" },
+  { name: "Upgrade RAM / SSD (jasa)", price: "Rp 100k – 250k" },
+  { name: "Upgrade VGA/PSU/MB (jasa)", price: "Rp 200k – 500k" },
+  { name: "Rakit PC Standard", price: "Rp 200k – 400k" },
+  { name: "Rakit PC Gaming / Custom", price: "Rp 400k – 750k" },
   { name: "Konsultasi Spesifikasi", price: "GRATIS" },
 ];
 
 // 5. Pembuatan Aplikasi & Website
 const webPricelist = [
-  { name: "Website Profil Sekolah", price: "2jt – 5jt" },
-  { name: "Website Profil UMKM", price: "1.5jt – 4jt" },
-  { name: "Website Company Profile", price: "3jt – 7jt" },
-  { name: "Sistem Informasi Sekolah", price: "5jt – 15jt" },
-  { name: "Aplikasi Web Custom", price: "7jt – 25jt" },
+  { name: "Website Profil Sekolah", price: "Rp 2jt – 5jt" },
+  { name: "Website Profil UMKM", price: "Rp 1.5jt – 4jt" },
+  { name: "Website Company Profile", price: "Rp 3jt – 7jt" },
+  { name: "Sistem Informasi Sekolah", price: "Rp 5jt – 15jt" },
+  { name: "Aplikasi Web Custom", price: "Rp 7jt – 25jt" },
 ];
 ---
 
@@ -84,7 +103,7 @@ const webPricelist = [
                             01 // PRODUK DAN LAYANAN
                         </h2>
                         
-                        <div class="grid grid-cols-1 gap-4">
+                        <div class="grid grid-cols-1 gap-4 text-sm leading-relaxed">
                             {[
                                 { t: "1. Penjualan Unit", d: "Menyediakan berbagai unit komputer, laptop, dan perangkat IT siap pakai untuk kebutuhan pribadi, sekolah, dan perkantoran, dengan pilihan spesifikasi yang dapat disesuaikan budget." },
                                 { t: "2. Aksesoris & Sparepart", d: "Menyediakan berbagai aksesoris serta sparepart komputer dan laptop untuk menunjang performa, kenyamanan, dan perawatan perangkat, tersedia produk original maupun alternatif." },
@@ -103,7 +122,7 @@ const webPricelist = [
                     <section class="space-y-8">
                         <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
                             <span class="w-1.5 h-6 bg-green-500 rounded-full"></span>
-                            02 // 💰 PRICELIST ESTIMASI
+                            02 // PRICELIST ESTIMASI
                         </h2>
                         
                         <div class="space-y-6">
@@ -113,8 +132,8 @@ const webPricelist = [
                                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
                                     {unitProducts.map(p => (
                                         <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-400">{p.name}</span>
-                                            <span class="text-sm font-bold text-white font-mono">{p.price}</span>
+                                            <span class="text-sm text-neutral-300">{p.name}</span>
+                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{p.price}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -125,8 +144,8 @@ const webPricelist = [
                                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
                                     {spareparts.map(s => (
                                         <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-400">{s.name}</span>
-                                            <span class="text-sm font-bold text-white font-mono">{s.price}</span>
+                                            <span class="text-sm text-neutral-300">{s.name}</span>
+                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{s.price}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -136,18 +155,22 @@ const webPricelist = [
                                 <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Service Komputer & Laptop</div>
                                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
                                     <div class="space-y-3">
-                                        <div class="text-[10px] text-neutral-500 font-bold uppercase mb-2 underline tracking-widest">A. Service Langsung</div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Service Ringan</span> <span class="text-white font-mono font-bold">Rp 100k-250k</span></div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Ganti Pasta Prosesor</span> <span class="text-white font-mono font-bold">Rp 100k-200k</span></div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Instal Windows</span> <span class="text-white font-mono font-bold">Rp 100k-300k</span></div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Hardware Ringan</span> <span class="text-white font-mono font-bold">Rp 200k-800k</span></div>
+                                        <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">A. Service Langsung</div>
+                                        {serviceDirect.map(s => (
+                                            <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
+                                                <span class="text-sm text-neutral-300">{s.name}</span>
+                                                <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{s.price}</span>
+                                            </div>
+                                        ))}
                                     </div>
                                     <div class="space-y-3">
                                         <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">B. Maintenance Remote</div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Remote Troubleshooting</span> <span class="text-green-400 font-bold font-mono">Rp 25.000</span></div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Remote Maintenance</span> <span class="text-white font-mono font-bold">Rp 50k-100k</span></div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Instal App & Setting</span> <span class="text-white font-mono font-bold">Rp 50k-75k</span></div>
-                                        <div class="flex justify-between border-b border-neutral-800 pb-1 text-xs"><span>Paket Bulanan (1-5 PC)</span> <span class="text-white font-mono font-bold">Rp 200k-400k</span></div>
+                                        {serviceRemote.map(s => (
+                                            <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
+                                                <span class="text-sm text-neutral-300">{s.name}</span>
+                                                <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{s.price}</span>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -157,8 +180,8 @@ const webPricelist = [
                                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
                                     {upgradeRakitPricelist.map(u => (
                                         <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-400">{u.name}</span>
-                                            <span class="text-sm font-bold text-white font-mono">{u.price}</span>
+                                            <span class="text-sm text-neutral-300">{u.name}</span>
+                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{u.price}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -169,8 +192,8 @@ const webPricelist = [
                                 <div class="p-6 space-y-3">
                                     {webPricelist.map(w => (
                                         <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-400">{w.name}</span>
-                                            <span class="text-sm font-bold text-white font-mono">Rp {w.price}</span>
+                                            <span class="text-sm text-neutral-300">{w.name}</span>
+                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{w.price}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -198,7 +221,7 @@ const webPricelist = [
                             <div class="flex items-start gap-4 p-5 rounded-2xl border border-neutral-800 bg-neutral-900/20 leading-relaxed">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 shrink-0 mt-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                 <div>
-                                    <p class="text-white font-bold mb-1 uppercase tracking-tighter font-tech">One Computer HQ</p>
+                                    <p class="text-white font-bold mb-1 uppercase tracking-tighter font-tech">One Computer</p>
                                     <p>Sindangreret, RT/RW 005/001 (Samping SMK Swadaya Karangnunggal), Tasikmalaya, Jawa Barat.</p>
                                 </div>
                             </div>
@@ -216,28 +239,42 @@ const webPricelist = [
                 </div>
 
                 <div class="space-y-8">
-                    <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm space-y-6">
+                    
+                    <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm">
                         <h3 class="text-xs font-bold text-white font-tech mb-6 uppercase tracking-wider border-b border-neutral-800 pb-4 flex items-center gap-2">
                              <span class="w-1 h-4 bg-green-500 rounded-full"></span>
                              INFORMASI LAYANAN
                         </h3>
+                        
                         <div class="space-y-6">
                             <div>
-                                <div class="text-[9px] text-neutral-500 font-mono mb-2 uppercase tracking-widest text-center">Metode Pembayaran</div>
-                                <div class="flex flex-wrap gap-2 justify-center">
-                                    <span class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded text-[9px] text-neutral-300 font-mono italic text-xs uppercase font-bold tracking-tighter">CASH</span>
-                                    <span class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded text-[9px] text-neutral-300 font-mono italic text-xs uppercase font-bold tracking-tighter">TRANSFER</span>
-                                    <span class="px-2 py-1 bg-green-900/20 border border-green-800 rounded text-[9px] text-green-400 font-mono uppercase font-bold italic tracking-tighter">QRIS Ready</span>
+                                <div class="text-[10px] text-neutral-500 font-mono mb-3 uppercase tracking-widest flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                                    Pembayaran
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-neutral-800 border border-neutral-700 rounded text-[10px] text-neutral-300 font-mono font-bold tracking-tight">CASH</span>
+                                    <span class="px-3 py-1 bg-neutral-800 border border-neutral-700 rounded text-[10px] text-neutral-300 font-mono font-bold tracking-tight">TRANSFER</span>
+                                    <span class="px-3 py-1 bg-green-900/20 border border-green-800 rounded text-[10px] text-green-400 font-mono font-bold tracking-tight shadow-[0_0_10px_rgba(34,197,94,0.1)]">QRIS</span>
                                 </div>
                             </div>
-                            <ul class="space-y-4">
-                                {["Garansi Servis Terjamin", "Layanan Panggilan", "Maintenance Bulanan", "Konsultasi IT Gratis"].map(list => (
-                                    <li class="flex items-center gap-3 text-xs text-neutral-400 font-mono">
-                                        <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                                        <span class="uppercase tracking-tighter">{list}</span>
-                                    </li>
-                                ))}
-                            </ul>
+
+                            <div class="h-[1px] bg-neutral-800 w-full"></div>
+
+                            <div>
+                                <div class="text-[10px] text-neutral-500 font-mono mb-3 uppercase tracking-widest flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                    Fasilitas
+                                </div>
+                                <ul class="space-y-3">
+                                    {["Garansi Servis Terjamin", "Layanan Panggilan", "Maintenance Bulanan", "Konsultasi IT Gratis"].map(list => (
+                                        <li class="flex items-start gap-3 text-xs text-neutral-400 font-mono leading-relaxed group">
+                                            <svg class="w-4 h-4 text-green-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <span class="uppercase tracking-tight group-hover:text-green-400 transition-colors">{list}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
