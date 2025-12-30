@@ -4,11 +4,10 @@ import { Image } from 'astro:assets';
 
 // --- 1. IMPORT ASSETS (MENGGUNAKAN GAMBAR ABSENSI SEBAGAI PLACEHOLDER) ---
 // Path gambar disamakan dulu agar tidak error
-import serverDashboard from '../../assets/absensi-one/server/dashboard.png';
-import serverSiswa from '../../assets/absensi-one/server/siswa.png';
-import serverSekolah from '../../assets/absensi-one/server/sekolah.png';
-import serverAbsensi from '../../assets/absensi-one/server/absensi.png';
-import serverPengguna from '../../assets/absensi-one/server/pengguna.png';
+import serverDashboard from '../../assets/cbt-client-one/server/dashboard.png';
+import serverSiswa from '../../assets/cbt-client-one/server/siswa.png';
+import serverSekolah from '../../assets/cbt-client-one/server/soal.png';
+import serverUjian from '../../assets/cbt-client-one/server/ujian.png';
 
 // Client Assets
 import clientAbsensi from '../../assets/absensi-one/client/absensi.jpg';
@@ -20,8 +19,7 @@ import clientProfil from '../../assets/absensi-one/client/profil.jpg';
 const serverGallery = [
   { img: serverSiswa, title: "Manajemen Peserta Ujian" },
   { img: serverSekolah, title: "Bank Soal & Jadwal" },
-  { img: serverAbsensi, title: "Monitoring Ujian Realtime" },
-  { img: serverPengguna, title: "Analisis Hasil Ujian" },
+  { img: serverUjian, title: "Monitoring Ujian Realtime" },
 ];
 
 // Data Array Client
