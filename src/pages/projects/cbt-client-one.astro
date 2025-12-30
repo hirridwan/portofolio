@@ -1,5 +1,36 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// --- 1. IMPORT ASSETS (MENGGUNAKAN GAMBAR ABSENSI SEBAGAI PLACEHOLDER) ---
+// Path gambar disamakan dulu agar tidak error
+import serverDashboard from '../../assets/absensi-one/server/dashboard.png';
+import serverSiswa from '../../assets/absensi-one/server/siswa.png';
+import serverSekolah from '../../assets/absensi-one/server/sekolah.png';
+import serverAbsensi from '../../assets/absensi-one/server/absensi.png';
+import serverPengguna from '../../assets/absensi-one/server/pengguna.png';
+
+// Client Assets
+import clientAbsensi from '../../assets/absensi-one/client/absensi.jpg';
+import clientFaceDetection from '../../assets/absensi-one/client/facedetection.jpg';
+import clientRiwayat from '../../assets/absensi-one/client/riwayat.jpg';
+import clientProfil from '../../assets/absensi-one/client/profil.jpg';
+
+// Data Array Server (Judul disesuaikan untuk konteks CBT tapi gambar masih Absensi)
+const serverGallery = [
+  { img: serverSiswa, title: "Manajemen Peserta Ujian" },
+  { img: serverSekolah, title: "Bank Soal & Jadwal" },
+  { img: serverAbsensi, title: "Monitoring Ujian Realtime" },
+  { img: serverPengguna, title: "Analisis Hasil Ujian" },
+];
+
+// Data Array Client
+const clientGallery = [
+  { img: clientAbsensi, title: "Login Peserta" },
+  { img: clientFaceDetection, title: "Ujian (Locked Mode)" },
+  { img: clientRiwayat, title: "Token Ujian" },
+  { img: clientProfil, title: "Hasil Sementara" },
+];
 ---
 
 <Layout title="CBT Client One | Detail Proyek">
@@ -29,7 +60,7 @@ import Layout from '../../layouts/Layout.astro';
                     <span class="text-xs text-green-500 font-mono tracking-widest">SIAP DIPAKAI</span>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight">CBT Client One</h1>
-                <p class="text-xl text-neutral-400 max-w-2xl">Aplikasi Ujian Online Aman dengan Fitur Anti-Curang (Lockdown Browser).</p>
+                <p class="text-xl text-neutral-400 max-w-2xl">Aplikasi Ujian Online Anti-Curang (Kiosk Advanced Mode).</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -39,7 +70,7 @@ import Layout from '../../layouts/Layout.astro';
                     <section class="space-y-4">
                         <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
                             <span class="w-1 h-6 bg-cyan-500 rounded-full"></span>
-                            1. DESKRIPSI PROYEK
+                            DESKRIPSI PROYEK
                         </h2>
                         <p class="leading-relaxed text-neutral-400">
                             CBT Client One dirancang khusus untuk sekolah yang melaksanakan ujian berbasis komputer. Aplikasi ini mengunci sistem operasi siswa sehingga mereka <strong>tidak bisa membuka browser lain, kalkulator, atau aplikasi chatting</strong> selama ujian berlangsung.
@@ -49,17 +80,51 @@ import Layout from '../../layouts/Layout.astro';
                     </section>
 
                     <section class="space-y-8">
-                        <div class="space-y-3">
-                            <h3 class="text-sm font-mono text-neutral-500 uppercase tracking-widest">>> 2. TAMPILAN ADMIN (WEB)</h3>
-                            <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all">
-                                <img src="https://placehold.co/800x450/1e1e2e/FFF?text=Dashboard+Admin+CBT" alt="Backend Dashboard" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                        {/* --- BAGIAN TAMPILAN SERVER --- */}
+                        <div class="space-y-4">
+                            <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
+                                <span class="w-1 h-6 bg-cyan-500 rounded-full"></span>
+                                TAMPILAN SERVER
+                            </h2>
+                            
+                            {/* 1. Highlight Dashboard Utama */}
+                            <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all shadow-lg">
+                                <Image src={serverDashboard} alt="Dashboard Admin CBT" class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+                                <div class="px-4 py-2 border-t border-neutral-800 bg-neutral-900/80">
+                                    <span class="text-[10px] font-mono text-cyan-500 uppercase tracking-widest">Dashboard Admin</span>
+                                </div>
+                            </div>
+
+                            {/* 2. Grid untuk Menu Lainnya (2 kolom) */}
+                            <div class="grid grid-cols-2 gap-4">
+                                {serverGallery.map((item) => (
+                                    <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all">
+                                        <Image src={item.img} alt={item.title} class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity aspect-video" />
+                                        <div class="px-3 py-1.5 border-t border-neutral-800 bg-neutral-900/80 text-center">
+                                            <span class="text-[10px] text-neutral-400 uppercase tracking-wide group-hover:text-cyan-400 transition-colors">{item.title}</span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        <div class="space-y-3">
-                            <h3 class="text-sm font-mono text-neutral-500 uppercase tracking-widest">>> 3. TAMPILAN CLIENT (UJIAN)</h3>
-                            <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all">
-                                <img src="https://placehold.co/800x450/1e1e2e/FFF?text=Tampilan+Siswa+Sedang+Ujian+(Locked)" alt="Exam Interface" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                        {/* --- BAGIAN TAMPILAN CLIENT --- */}
+                        <div class="space-y-4 pt-4">
+                            <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
+                                <span class="w-1 h-6 bg-cyan-500 rounded-full"></span>
+                                TAMPILAN CLIENT
+                            </h2>
+                            
+                            {/* Horizontal Scroll Container */}
+                            <div class="flex gap-4 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x snap-mandatory">
+                                {clientGallery.map((item) => (
+                                    <div class="snap-center w-[200px] flex-shrink-0 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900/50 group hover:border-cyan-500/30 transition-all shadow-md hover:shadow-cyan-500/10">
+                                        <Image src={item.img} alt={item.title} class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                                        <div class="px-3 py-2 border-t border-neutral-800 bg-neutral-900/80 text-center">
+                                            <span class="text-[10px] text-neutral-400 uppercase tracking-wide group-hover:text-cyan-400 transition-colors">{item.title}</span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </section>
@@ -69,7 +134,7 @@ import Layout from '../../layouts/Layout.astro';
                 <div class="space-y-8">
                     
                     <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/30 backdrop-blur-sm">
-                        <h3 class="text-sm font-bold text-white font-tech mb-6 uppercase tracking-wider">4. TEKNOLOGI</h3>
+                        <h3 class="text-sm font-bold text-white font-tech mb-6 uppercase tracking-wider">TEKNOLOGI</h3>
                         
                         <div class="space-y-6">
                             <div>
@@ -108,9 +173,9 @@ import Layout from '../../layouts/Layout.astro';
                         <h3 class="text-sm font-bold text-cyan-400 font-tech mb-4 uppercase tracking-wider relative z-10">PENAWARAN SPESIAL</h3>
                         
                         <div class="space-y-1 mb-6 relative z-10">
-                            <div class="text-sm text-red-400 line-through decoration-red-500/50 font-mono">Rp 3.500.000</div>
-                            <div class="text-3xl md:text-4xl font-bold text-white">Rp 750.000</div>
-                            <div class="text-xs text-neutral-500">*Aplikasi Client + Admin Panel</div>
+                            <div class="text-sm text-red-400 line-through decoration-red-500/50 font-mono">Rp 5.000.000</div>
+                            <div class="text-3xl md:text-4xl font-bold text-white">Rp 1.000.000</div>
+                            <div class="text-xs text-neutral-500">* Aplikasi + Panduan</div>
                         </div>
 
                         <div class="space-y-3 relative z-10">
@@ -129,3 +194,14 @@ import Layout from '../../layouts/Layout.astro';
         </div>
     </main>
 </Layout>
+
+<style>
+    /* Utility untuk menyembunyikan scrollbar tapi tetap bisa di-scroll */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+</style>
