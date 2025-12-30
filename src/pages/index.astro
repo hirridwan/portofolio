@@ -1,7 +1,44 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// --- 1. DATA: RIWAYAT KARIR ---
+// --- DATA: PORTFOLIO (DEV) ---
+const webProjects = [
+  { 
+    title: "Absensi One", 
+    desc: "Sistem presensi modern berbasis Geo-Location & Face Recognition.", 
+    tag: "IOT / WEB APP" 
+  },
+  { 
+    title: "CBT Client One", 
+    desc: "Platform ujian online dengan keamanan tingkat tinggi (Anti-Curang).", 
+    tag: "DESKTOP / SECURITY" 
+  },
+  { 
+    title: "Simple Quran", 
+    desc: "Aplikasi Al-Quran digital lengkap dengan kumpulan doa harian.", 
+    tag: "ANDROID / MOBILE" 
+  },
+];
+
+// --- DATA: PORTFOLIO (AI) ---
+const aiProjects = [
+  { 
+    title: "AI KDRAMA", 
+    desc: "Library Prompt Engineering untuk visualisasi realisme artis Korea.", 
+    tag: "GENERATIVE AI" 
+  },
+];
+
+// --- DATA: BISNIS ---
+const business = [
+  { 
+    title: "One Computer", 
+    desc: "Jual Beli Komputer, Jasa Service, Pembuatan Web & Aplikasi, serta Konsultasi IT.", 
+    tag: "IT SOLUTIONS & SERVICES" 
+  },
+];
+
+// --- DATA: RIWAYAT KARIR ---
 const experience = [
   {
     period: "2025 — SEKARANG",
@@ -23,44 +60,7 @@ const experience = [
   }
 ];
 
-// --- 2.1 DATA: DEV PROJECT ---
-const webProjects = [
-  { 
-    title: "Absensi One", 
-    desc: "Sistem presensi modern berbasis Geo-Location & Face Recognition.", 
-    tag: "IOT / WEB APP" 
-  },
-  { 
-    title: "CBT Client One", 
-    desc: "Platform ujian online dengan keamanan tingkat tinggi (Anti-Curang).", 
-    tag: "DESKTOP / SECURITY" 
-  },
-  { 
-    title: "Simple Quran", 
-    desc: "Aplikasi Al-Quran digital lengkap dengan kumpulan doa harian.", 
-    tag: "ANDROID / MOBILE" 
-  },
-];
-
-// --- 2.2 DATA: AI PROJECT ---
-const aiProjects = [
-  { 
-    title: "AI KDRAMA", 
-    desc: "Library Prompt Engineering untuk visualisasi realisme artis Korea.", 
-    tag: "GENERATIVE AI" 
-  },
-];
-
-// --- 3. DATA: BISNIS ---
-const business = [
-  { 
-    title: "One Computer", 
-    desc: "Jual Beli Komputer, Jasa Service, Pembuatan Web & Aplikasi, serta Konsultasi IT.", 
-    tag: "IT SOLUTIONS & SERVICES" 
-  },
-];
-
-// --- 4. DATA: SERTIFIKASI BNSP ---
+// --- DATA: SERTIFIKASI BNSP ---
 const certificates = [
   "Junior Web Developer",
   "Analyst Program",
@@ -68,19 +68,19 @@ const certificates = [
   "Junior Office Operator"
 ];
 
-// --- 5. DATA: TECH STACK / KEAHLIAN ---
+// --- DATA: TECH STACK / KEAHLIAN ---
 const techStack = [
   "Laravel", "Astro", "React", "Tailwind CSS", "Android Kotlin", "Python AI", "Linux Server", "Cloudflare"
 ];
 ---
 
-<Layout title="Ridwan Maulana, S.Kom. | Portfolio">
+<Layout title="Ridwan Maulana, S.Kom. | Portofolio">
     
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto">
         <ul class="flex items-center justify-center gap-1 md:gap-6 px-4 py-3 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 shadow-[0_0_15px_rgba(0,0,0,0.5)] overflow-x-auto no-scrollbar">
-            <li><a href="#career" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">KARIR</a></li>
-            <li><a href="#portfolio" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">PORTFOLIO</a></li>
+            <li><a href="#portofolio" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">PORTOFOLIO</a></li>
             <li><a href="#business" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-green-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">BISNIS</a></li>
+            <li><a href="#career" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-cyan-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">KARIR</a></li>
             <li><a href="#certs" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-yellow-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">SERTIFIKASI</a></li>
             <li><a href="#tech" class="text-[10px] md:text-xs font-tech text-neutral-400 hover:text-purple-400 hover:bg-white/5 px-3 py-1.5 rounded transition-all whitespace-nowrap">KEAHLIAN</a></li>
         </ul>
@@ -122,37 +122,15 @@ const techStack = [
                 </div>
             </section>
 
-            <section id="career" class="scroll-mt-32">
-                <div class="flex items-center gap-4 mb-8">
-                    <h2 class="text-2xl font-bold text-white font-tech">01 // RIWAYAT KARIR</h2>
-                    <div class="h-[1px] bg-neutral-800 flex-grow"></div>
-                </div>
-
-                <div class="space-y-0 border-l border-neutral-800 ml-3">
-                    {experience.map((job) => (
-                        <div class="relative pl-8 pb-10 last:pb-0 group">
-                            <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-neutral-800 group-hover:bg-cyan-400 transition-colors border border-neutral-950"></div>
-                            
-                            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
-                                <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">{job.role}</h3>
-                                <span class="text-xs font-mono text-cyan-600 bg-cyan-900/10 px-2 py-1 rounded border border-cyan-900/30">{job.period}</span>
-                            </div>
-                            <div class="text-sm font-tech text-neutral-500 mb-2 uppercase tracking-wide">{job.company}</div>
-                            <p class="text-sm text-neutral-400 leading-relaxed max-w-2xl">{job.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            <section id="portfolio" class="scroll-mt-32 space-y-12">
+            <section id="portofolio" class="scroll-mt-32 space-y-12">
                 
                 <div class="space-y-6">
                     <div class="flex items-center gap-4">
-                        <h2 class="text-2xl font-bold text-white font-tech">02 // PORTFOLIO</h2>
+                        <h2 class="text-2xl font-bold text-white font-tech">01 // PORTOFOLIO</h2>
                         <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                     </div>
                     
-                    <h3 class="text-sm font-mono text-cyan-500 uppercase tracking-widest pl-1">>> 2.1 DEV PROJECTS</h3>
+                    <h3 class="text-sm font-mono text-cyan-500 uppercase tracking-widest pl-1">>> 1.1 DEV PROJECTS</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {webProjects.map((project) => (
                             <div class="group relative p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:scale-[1.02] hover:border-cyan-500/30">
@@ -173,7 +151,7 @@ const techStack = [
                 </div>
 
                 <div class="space-y-6">
-                    <h3 class="text-sm font-mono text-purple-500 uppercase tracking-widest pl-1">>> 2.2 AI PROJECTS</h3>
+                    <h3 class="text-sm font-mono text-purple-500 uppercase tracking-widest pl-1">>> 1.2 AI PROJECTS</h3>
                     <div class="grid grid-cols-1 gap-6">
                         {aiProjects.map((project) => (
                             <div class="p-6 rounded-xl border border-purple-500/20 bg-purple-900/10 relative overflow-hidden group hover:border-purple-500/40 transition-colors">
@@ -191,7 +169,7 @@ const techStack = [
 
             <section id="business" class="scroll-mt-32">
                 <div class="flex items-center gap-4 mb-8">
-                    <h2 class="text-2xl font-bold text-white font-tech">03 // BISNIS</h2>
+                    <h2 class="text-2xl font-bold text-white font-tech">02 // BISNIS</h2>
                     <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 </div>
                 
@@ -216,9 +194,31 @@ const techStack = [
                 </div>
             </section>
 
+            <section id="career" class="scroll-mt-32">
+                <div class="flex items-center gap-4 mb-8">
+                    <h2 class="text-2xl font-bold text-white font-tech">03 // RIWAYAT KARIR</h2>
+                    <div class="h-[1px] bg-neutral-800 flex-grow"></div>
+                </div>
+
+                <div class="space-y-0 border-l border-neutral-800 ml-3">
+                    {experience.map((job) => (
+                        <div class="relative pl-8 pb-10 last:pb-0 group">
+                            <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-neutral-800 group-hover:bg-cyan-400 transition-colors border border-neutral-950"></div>
+                            
+                            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                                <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">{job.role}</h3>
+                                <span class="text-xs font-mono text-cyan-600 bg-cyan-900/10 px-2 py-1 rounded border border-cyan-900/30">{job.period}</span>
+                            </div>
+                            <div class="text-sm font-tech text-neutral-500 mb-2 uppercase tracking-wide">{job.company}</div>
+                            <p class="text-sm text-neutral-400 leading-relaxed max-w-2xl">{job.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             <section id="certs" class="scroll-mt-32">
                 <div class="flex items-center gap-4 mb-8">
-                    <h2 class="text-2xl font-bold text-white font-tech">04 // SERTIFIKASI</h2>
+                    <h2 class="text-2xl font-bold text-white font-tech">04 // SERTIFIKASI BNSP</h2>
                     <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 </div>
 
@@ -267,5 +267,38 @@ const techStack = [
             </footer>
 
         </div>
+
+        <button
+            id="backToTop"
+            class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-neutral-400 opacity-0 invisible transition-all duration-300 hover:border-cyan-500 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] group"
+            aria-label="Back to Top"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </button>
+
     </main>
 </Layout>
+
+<script>
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    if (backToTopBtn) {
+        // Tampilkan tombol saat scroll ke bawah
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        // Fungsi klik untuk kembali ke atas
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+</script>
