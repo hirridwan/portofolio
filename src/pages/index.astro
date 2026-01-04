@@ -33,8 +33,13 @@ const webProjects = [
 // --- 2. DATA: PORTOFOLIO (AI) ---
 const aiProjects = [
   { 
-    title: "AI KDRAMA", 
+    title: "K-Drama", 
     desc: "Library Prompt Engineering untuk visualisasi realisme artis Korea.", 
+    tag: "GENERATIVE AI" 
+  },
+  { 
+    title: "MCU", 
+    desc: "Library Prompt Engineering untuk visualisasi karakter Marvel Cinematic Universe.", 
     tag: "GENERATIVE AI" 
   },
 ];
@@ -251,15 +256,25 @@ const socialLinks = [
                         })}
                     </div>
                 </div>
+                
+                {/* BAGIAN AI PROJECT (DIUBAH MENJADI KOTAK KECIL/GRID) */}
                 <div class="space-y-6">
                     <h3 class="text-sm font-mono text-purple-500 uppercase tracking-widest pl-1">>> 1.2 AI PROJECT</h3>
-                    <div class="grid grid-cols-1 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {aiProjects.map((project) => (
-                            <div class="p-6 rounded-xl border border-purple-500/20 bg-purple-900/10 relative overflow-hidden group hover:border-purple-500/40 transition-colors">
-                                <h3 class="text-xl font-bold text-white mb-2 relative z-10">{project.title}</h3>
-                                <p class="text-sm text-neutral-400 relative z-10">{project.desc}</p>
-                                <div class="mt-4 text-[10px] font-mono text-purple-400 relative z-10 border border-purple-500/30 bg-purple-500/10 px-2 py-1 rounded w-fit">{project.tag}</div>
-                            </div>
+                            <a href="https://rmfhd.my.id" class="group relative p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:scale-[1.02] hover:border-purple-500/30 flex flex-col h-full justify-between gap-6 cursor-pointer">
+                                <div>
+                                    <h3 class="text-xl font-bold text-neutral-200 group-hover:text-purple-400 mb-2">{project.title}</h3>
+                                    <p class="text-sm text-neutral-500 leading-relaxed">{project.desc}</p>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-neutral-800 pt-4">
+                                    <span class="text-[10px] font-mono text-purple-600 uppercase tracking-wider border border-purple-900/30 bg-purple-900/10 px-2 py-1 rounded">{project.tag}</span>
+                                    <span class="text-[10px] font-bold text-purple-500 group-hover:underline flex items-center gap-1">
+                                        Detail 
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                                    </span>
+                                </div>
+                            </a>
                         ))}
                     </div>
                 </div>
