@@ -41,11 +41,19 @@ const serviceRemote = [
     { name: "Instal Aplikasi / Game", price: "Mulai dari Rp 50k" },
 ];
 
-// C. Upgrade & Rakit PC (Sekarang menjadi sub-kategori Service)
+// C. Upgrade & Rakit PC
 const upgradeRakitPricelist = [
   { name: "Upgrade Komponen", price: "Mulai dari Rp 100k" },
   { name: "Rakit PC", price: "Mulai dari Rp 200k" },
   { name: "Konsultasi", price: "GRATIS" },
+];
+
+// D. Handphone / Smartphone (DATA BARU)
+const serviceHp = [
+  { name: "Instal Ulang / Flashing", price: "Mulai dari Rp 100k" },
+  { name: "Instal Aplikasi / Game", price: "Mulai dari Rp 100k" },
+  { name: "Backup & Restore Data", price: "Mulai dari Rp 100k" },
+  { name: "Service & Troubleshooting", price: "Mulai dari Rp 100k" },
 ];
 
 // 4. Pembuatan Website & Aplikasi
@@ -57,7 +65,7 @@ const webPricelist = [
   { name: "Website Undangan", price: "Mulai dari Rp 500k" },
   { name: "Aplikasi CBT", price: "Mulai dari Rp 1jt" },
   { name: "Aplikasi Absensi", price: "Mulai dari Rp 1jt" },
-  { name: "Aplikasi / Web Custom", price: "Mulai dari Rp 1jt" },
+  { name: "Website / Aplikasi Kustom", price: "Mulai dari Rp 1jt" },
 ];
 ---
 
@@ -110,12 +118,12 @@ const webPricelist = [
                                     d: "Menyediakan berbagai unit komputer, laptop, dan perangkat IT siap pakai untuk kebutuhan pribadi, sekolah, dan perkantoran, dengan pilihan spesifikasi yang dapat disesuaikan budget, serta menyediakan berbagai aksesoris serta sparepart komputer dan laptop untuk menunjang performa, kenyamanan, dan perawatan perangkat, tersedia produk original maupun alternatif." 
                                 },
                                 { 
-                                    t: "2. Service Komputer & Laptop", 
+                                    t: "2. Service Komputer, Laptop, dan Handphone", 
                                     d: "Melayani perbaikan, perawatan, dan maintenance baik secara langsung maupun jarak jauh (remote), mencakup software dan hardware tertentu dengan proses transparan, serta melayani jasa upgrade performa komputer dan laptop serta perakitan PC baru sesuai kebutuhan kantor, sekolah, desain, editing, maupun gaming." 
                                 },
                                 { 
                                     t: "3. Pembuatan Website & Aplikasi", 
-                                    d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil, website undangan, hingga aplikasi / web kustom." 
+                                    d: "Menyediakan jasa pembuatan website & aplikasi untuk sekolah, UMKM, dan instansi, mulai dari landing page, website profil, website undangan, hingga website / aplikasi kustom." 
                                 }
                             ].map(item => (
                                 <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/40 hover:border-green-500/30 transition-all group">
@@ -162,7 +170,7 @@ const webPricelist = [
                             </div>
 
                             <div class="rounded-2xl border border-neutral-800 bg-neutral-900/20 overflow-hidden">
-                                <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Service Komputer & Laptop</div>
+                                <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Service Komputer, Laptop, dan Handphone</div>
                                 <div class="p-6 space-y-10">
                                     
                                     <div class="space-y-3">
@@ -191,6 +199,17 @@ const webPricelist = [
                                             <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
                                                 <span class="text-sm text-neutral-300">{u.name}</span>
                                                 <span class="text-[10px] font-bold text-green-400 font-mono tracking-wide">{u.price}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* D. Handphone (Ditambahkan di sini) */}
+                                    <div class="space-y-3">
+                                        <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">D. Handphone / Smartphone</div>
+                                        {serviceHp.map(h => (
+                                            <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
+                                                <span class="text-sm text-neutral-300">{h.name}</span>
+                                                <span class="text-[10px] font-bold text-green-400 font-mono tracking-wide">{h.price}</span>
                                             </div>
                                         ))}
                                     </div>
