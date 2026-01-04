@@ -98,10 +98,18 @@ const webPricelist = [
                         
                         <div class="grid grid-cols-1 gap-4 text-sm leading-relaxed">
                             {[
-                                { t: "1. Penjualan Unit", d: "Menyediakan berbagai unit komputer, laptop, dan perangkat IT siap pakai untuk kebutuhan pribadi, sekolah, dan perkantoran, dengan pilihan spesifikasi yang dapat disesuaikan budget." },
-                                { t: "2. Aksesoris & Sparepart", d: "Menyediakan berbagai aksesoris serta sparepart komputer dan laptop untuk menunjang performa, kenyamanan, dan perawatan perangkat, tersedia produk original maupun alternatif." },
-                                { t: "3. Service Komputer & Laptop", d: "Melayani perbaikan, perawatan, dan maintenance baik secara langsung maupun jarak jauh (remote), mencakup software dan hardware tertentu dengan proses transparan, serta melayani jasa upgrade performa komputer dan laptop serta perakitan PC baru sesuai kebutuhan kantor, sekolah, desain, editing, maupun gaming." },
-                                { t: "4. Pembuatan Aplikasi & Website", d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil hingga sistem informasi kustom." }
+                                { 
+                                    t: "1. Penjualan Unit", 
+                                    d: "Menyediakan berbagai unit komputer, laptop, dan perangkat IT siap pakai untuk kebutuhan pribadi, sekolah, dan perkantoran, dengan pilihan spesifikasi yang dapat disesuaikan budget, serta menyediakan berbagai aksesoris serta sparepart komputer dan laptop untuk menunjang performa, kenyamanan, dan perawatan perangkat, tersedia produk original maupun alternatif." 
+                                },
+                                { 
+                                    t: "2. Service Komputer & Laptop", 
+                                    d: "Melayani perbaikan, perawatan, dan maintenance baik secara langsung maupun jarak jauh (remote), mencakup software dan hardware tertentu dengan proses transparan, serta melayani jasa upgrade performa komputer dan laptop serta perakitan PC baru sesuai kebutuhan kantor, sekolah, desain, editing, maupun gaming." 
+                                },
+                                { 
+                                    t: "3. Pembuatan Aplikasi & Website", 
+                                    d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil hingga sistem informasi kustom." 
+                                }
                             ].map(item => (
                                 <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/40 hover:border-green-500/30 transition-all group">
                                     <h3 class="text-green-400 font-bold mb-2 uppercase tracking-tight font-tech text-base">{item.t}</h3>
@@ -121,25 +129,28 @@ const webPricelist = [
                             
                             <div class="rounded-2xl border border-neutral-800 bg-neutral-900/20 overflow-hidden">
                                 <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Penjualan Unit</div>
-                                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                                    {unitProducts.map(p => (
-                                        <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-300">{p.name}</span>
-                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{p.price}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                <div class="p-6 space-y-10">
+                                    
+                                    <div class="space-y-3">
+                                        <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">A. Unit</div>
+                                        {unitProducts.map(p => (
+                                            <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
+                                                <span class="text-sm text-neutral-300">{p.name}</span>
+                                                <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{p.price}</span>
+                                            </div>
+                                        ))}
+                                    </div>
 
-                            <div class="rounded-2xl border border-neutral-800 bg-neutral-900/20 overflow-hidden">
-                                <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Aksesoris & Sparepart</div>
-                                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                                    {spareparts.map(s => (
-                                        <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-300">{s.name}</span>
-                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{s.price}</span>
-                                        </div>
-                                    ))}
+                                    <div class="space-y-3">
+                                        <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">B. Aksesoris & Sparepart</div>
+                                        {spareparts.map(s => (
+                                            <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
+                                                <span class="text-sm text-neutral-300">{s.name}</span>
+                                                <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{s.price}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
                                 </div>
                             </div>
 
