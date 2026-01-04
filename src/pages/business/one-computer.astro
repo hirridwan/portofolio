@@ -27,10 +27,12 @@ const spareparts = [
 // 3. Service Data (Manual Render di bawah untuk pemisahan kategori)
 // A. Service Langsung
 const serviceDirect = [
-    { name: "Service & Troubleshooting", price: "Mulai dari Rp 100k" },
     { name: "Cleaning & Repasta", price: "Mulai dari Rp 100k" },
+    { name: "Backup & Restore Data", price: "Mulai dari Rp 100k" },
     { name: "Instal Ulang Windows", price: "Mulai dari Rp 100k" },
     { name: "Instal Aplikasi / Game", price: "Mulai dari Rp 100k" },
+    { name: "Instal Driver & Optimasi", price: "Mulai dari Rp 100k" },
+    { name: "Service & Troubleshooting", price: "Mulai dari Rp 100k" },
 ];
 
 // B. Remote
@@ -48,6 +50,8 @@ const upgradeRakitPricelist = [
 
 // 4. Pembuatan Aplikasi & Website
 const webPricelist = [
+  { name: "Hosting dan Domain", price: "Mulai dari Rp 100k" },
+  { name: "Maintenance Website", price: "Mulai dari Rp 100k" },
   { name: "Website Profil", price: "Mulai dari Rp 500k" },
   { name: "Website Undangan", price: "Mulai dari Rp 500k" },
   { name: "Aplikasi / Web Custom", price: "Mulai dari Rp 1jt" },
@@ -108,7 +112,7 @@ const webPricelist = [
                                 },
                                 { 
                                     t: "3. Pembuatan Aplikasi & Website", 
-                                    d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil, website undangna, hingga aplikasi / web kustom." 
+                                    d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil, website undangan, hingga aplikasi / web kustom." 
                                 }
                             ].map(item => (
                                 <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/40 hover:border-green-500/30 transition-all group">
@@ -271,7 +275,7 @@ const webPricelist = [
                                     Fasilitas
                                 </div>
                                 <ul class="space-y-3">
-                                    {["Produk dan Layanan Bergaransi", "Layanan Panggilan", "Konsultasi IT Gratis"].map(list => (
+                                    {["Produk dan Layanan Bergaransi", "Service Panggilan (Onsite)", "Konsultasi IT Gratis"].map(list => (
                                         <li class="flex items-start gap-3 text-xs text-neutral-400 font-mono leading-relaxed group">
                                             <svg class="w-4 h-4 text-green-500 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             <span class="uppercase tracking-tight group-hover:text-green-400 transition-colors">{list}</span>
