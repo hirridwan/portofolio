@@ -7,21 +7,21 @@ import Layout from '../../layouts/Layout.astro';
 const unitProducts = [
   { name: "PC Rakitan Office", price: "Mulai dari Rp 3jt" },
   { name: "PC Rakitan Gaming", price: "Mulai dari Rp 5jt" },
-  { name: "Laptop Baru", price: "Mulai dari Rp 5jt" },
-  { name: "Laptop Bekas Bergaransi", price: "Mulai dari Rp 5jt" },
   { name: "Monitor", price: "Mulai dari Rp 1jt" },
   { name: "Printer", price: "Mulai dari Rp 1jt" },
+  { name: "Laptop Baru", price: "Mulai dari Rp 5jt" },
+  { name: "Laptop Bekas Bergaransi", price: "Mulai dari Rp 5jt" },
 ];
 
 // 2. Aksesoris & Sparepart
 const spareparts = [
   { name: "Mouse", price: "Mulai dari Rp 50k" },
   { name: "Keyboard", price: "Mulai dari Rp 50k" },
-  { name: "SSD 256GB – 1TB", price: "Mulai dari Rp 300k" },
+  { name: "Flashdisk", price: "Mulai dari Rp 50k" },
+  { name: "Charger Laptop", price: "Mulai dari Rp 100k" },
+  { name: "SSD", price: "Mulai dari Rp 300k" },
   { name: "RAM", price: "Mulai dari Rp 300k" },
   { name: "Harddisk", price: "Mulai dari Rp 500k" },
-  { name: "Charger Laptop", price: "Mulai dari Rp 100k" },
-  { name: "Flashdisk", price: "Mulai dari Rp 50k" },
 ];
 
 // 3. Service Data (Manual Render di bawah untuk pemisahan kategori)
@@ -30,29 +30,27 @@ const serviceDirect = [
     { name: "Service & Cleaning", price: "Mulai dari Rp 100k" },
     { name: "Ganti Pasta Prosesor", price: "Mulai dari Rp 100k" },
     { name: "Instal Ulang Windows", price: "Mulai dari Rp 100k" },
-    { name: "Instal Microsoft Office", price: "Mulai dari Rp 100k" },
+    { name: "Instal Aplikasi / Game", price: "Mulai dari Rp 100k" },
 ];
 
 // B. Remote
 const serviceRemote = [
     { name: "Remote Troubleshooting", price: "Mulai dari Rp 25k" },
-    { name: "Instal Aplikasi & Setting", price: "Mulai dari Rp 50k" },
+    { name: "Instal Aplikasi / Game", price: "Mulai dari Rp 50k" },
 ];
 
-// 4. Upgrade & Rakit PC
+// C. Upgrade & Rakit PC (Sekarang menjadi sub-kategori Service)
 const upgradeRakitPricelist = [
-  { name: "Upgrade Komponen (Jasa)", price: "Mulai dari Rp 100k" },
-  { name: "Rakit PC (Jasa)", price: "Mulai dari Rp 200k" },
-  { name: "Konsultasi (Jasa)", price: "GRATIS" },
+  { name: "Upgrade Komponen", price: "Mulai dari Rp 100k" },
+  { name: "Rakit PC", price: "Mulai dari Rp 200k" },
+  { name: "Konsultasi", price: "GRATIS" },
 ];
 
-// 5. Pembuatan Aplikasi & Website
+// 4. Pembuatan Aplikasi & Website
 const webPricelist = [
-  { name: "Website Profil Sekolah", price: "Mulai dari Rp 1jt" },
-  { name: "Website Profil UMKM", price: "Mulai dari Rp 1jt" },
-  { name: "Website Profile Perusahaan", price: "Mulai dari Rp 1jt" },
-  { name: "Sistem Informasi Sekolah", price: "Mulai dari Rp 5jt" },
-  { name: "Aplikasi Web Custom", price: "Mulai dari Rp 5jt" },
+  { name: "Website Profil", price: "Mulai dari Rp 1jt" },
+  { name: "Website Undangan", price: "Mulai dari Rp 5jt" },
+  { name: "Web / Aplikasi Custom", price: "Mulai dari Rp 5jt" },
 ];
 ---
 
@@ -102,9 +100,8 @@ const webPricelist = [
                             {[
                                 { t: "1. Penjualan Unit", d: "Menyediakan berbagai unit komputer, laptop, dan perangkat IT siap pakai untuk kebutuhan pribadi, sekolah, dan perkantoran, dengan pilihan spesifikasi yang dapat disesuaikan budget." },
                                 { t: "2. Aksesoris & Sparepart", d: "Menyediakan berbagai aksesoris serta sparepart komputer dan laptop untuk menunjang performa, kenyamanan, dan perawatan perangkat, tersedia produk original maupun alternatif." },
-                                { t: "3. Service Komputer & Laptop", d: "Melayani perbaikan, perawatan, dan maintenance baik secara langsung maupun jarak jauh (remote), mencakup software dan hardware tertentu dengan proses transparan." },
-                                { t: "4. Upgrade & Rakit PC", d: "Melayani jasa upgrade performa komputer dan laptop serta perakitan PC baru sesuai kebutuhan kantor, sekolah, desain, editing, maupun gaming." },
-                                { t: "5. Pembuatan Aplikasi & Website", d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil hingga sistem informasi kustom." }
+                                { t: "3. Service Komputer & Laptop", d: "Melayani perbaikan, perawatan, dan maintenance baik secara langsung maupun jarak jauh (remote), mencakup software dan hardware tertentu dengan proses transparan, serta melayani jasa upgrade performa komputer dan laptop serta perakitan PC baru sesuai kebutuhan kantor, sekolah, desain, editing, maupun gaming." },
+                                { t: "4. Pembuatan Aplikasi & Website", d: "Menyediakan jasa pembuatan aplikasi dan website untuk sekolah, UMKM, dan instansi, mulai dari website profil hingga sistem informasi kustom." }
                             ].map(item => (
                                 <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/40 hover:border-green-500/30 transition-all group">
                                     <h3 class="text-green-400 font-bold mb-2 uppercase tracking-tight font-tech text-base">{item.t}</h3>
@@ -148,7 +145,8 @@ const webPricelist = [
 
                             <div class="rounded-2xl border border-neutral-800 bg-neutral-900/20 overflow-hidden">
                                 <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Service Komputer & Laptop</div>
-                                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <div class="p-6 space-y-10">
+                                    
                                     <div class="space-y-3">
                                         <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">A. Service Langsung</div>
                                         {serviceDirect.map(s => (
@@ -158,6 +156,7 @@ const webPricelist = [
                                             </div>
                                         ))}
                                     </div>
+
                                     <div class="space-y-3">
                                         <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">B. Remote Service</div>
                                         {serviceRemote.map(s => (
@@ -167,18 +166,17 @@ const webPricelist = [
                                             </div>
                                         ))}
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="rounded-2xl border border-neutral-800 bg-neutral-900/20 overflow-hidden">
-                                <div class="bg-neutral-800/50 px-6 py-3 font-tech text-xs text-green-400 uppercase tracking-widest italic">Upgrade & Rakit PC</div>
-                                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                                    {upgradeRakitPricelist.map(u => (
-                                        <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
-                                            <span class="text-sm text-neutral-300">{u.name}</span>
-                                            <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{u.price}</span>
-                                        </div>
-                                    ))}
+                                    <div class="space-y-3">
+                                        <div class="text-[10px] text-green-500 font-bold uppercase mb-2 underline tracking-widest">C. Upgrade, Rakit PC & Konsultasi</div>
+                                        {upgradeRakitPricelist.map(u => (
+                                            <div class="flex justify-between items-center border-b border-neutral-800/50 pb-2">
+                                                <span class="text-sm text-neutral-300">{u.name}</span>
+                                                <span class="text-xs font-bold text-green-400 font-mono tracking-wide">{u.price}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
                                 </div>
                             </div>
 
