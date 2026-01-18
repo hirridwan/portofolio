@@ -1,0 +1,100 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+// ==============================================
+// 1. GENERATE HALAMAN DINAMIS
+// ==============================================
+export async function getStaticPaths() {
+  try {
+    // ⚠️ PENTING: Gunakan 127.0.0.1:8003 dan endpoint /content
+    const res = await fetch('http://127.0.0.1:8003/api/content');
+    const data = await res.json();
+    
+    // Ambil array 'projects' dari dalam JSON response
+    const projects = data.projects || [];
+
+    // Buat halaman untuk setiap project
+    return projects.map((project: any) => ({
+      params: { slug: project.slug },
+      props: { project },
+    }));
+
+  } catch (error) {
+    console.error("Gagal build privacy policy:", error);
+    return [];
+  }
+}
+
+// ==============================================
+// 2. AMBIL DATA PROJECT
+// ==============================================
+const { project } = Astro.props;
+
+// Tanggal update otomatis (saat build)
+const lastUpdated = new Date().toLocaleDateString('id-ID', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+});
+---
+
+<Layout title={`Privacy Policy | ${project.title}`}>
+    <main class="min-h-screen flex flex-col items-center px-6 relative overflow-hidden bg-neutral-950 text-neutral-300 pb-32">
+        
+        <div class="fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        
+        <div class="max-w-3xl w-full z-10 pt-12 md:pt-24">
+             <a href={`/projects/${project.slug}`} class="inline-flex items-center gap-2 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group font-mono mb-12">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                KEMBALI KE DETAIL PROJECT
+            </a>
+
+            <div class="space-y-4 border-b border-neutral-800 pb-8 mb-12">
+                <p class="text-sm font-mono text-cyan-500 uppercase tracking-widest">KEBIJAKAN PRIVASI</p>
+                <h1 class="text-3xl md:text-5xl font-bold text-white tracking-tight">{project.title}</h1>
+                <p class="text-neutral-500">Terakhir Diperbarui: {lastUpdated}</p>
+            </div>
+
+            <div class="space-y-6 text-neutral-400 leading-relaxed text-lg">
+                <p>
+                    Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda saat Anda menggunakan aplikasi atau layanan <strong>"{project.title}"</strong>.
+                </p>
+                
+                <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">1. Informasi yang Kami Kumpulkan</h3>
+                <p>
+                    Aplikasi <strong>{project.title}</strong> dirancang dengan mengutamakan privasi pengguna. 
+                    {project.type === 'ai' 
+                        ? 'Karena aplikasi ini berbasis Artificial Intelligence, data input mungkin diproses untuk menghasilkan output, namun kami tidak menyimpan data pribadi sensitif Anda.' 
+                        : 'Kami tidak mengumpulkan data pribadi secara spesifik kecuali informasi teknis dasar yang diperlukan agar aplikasi berjalan dengan lancar.'
+                    }
+                </p>
+
+                <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">2. Penggunaan Data</h3>
+                <p>Setiap data yang diproses oleh <strong>{project.title}</strong> digunakan semata-mata untuk:</p>
+                <ul class="list-disc list-inside ml-4 space-y-2">
+                    <li>Menyediakan fitur utama aplikasi.</li>
+                    <li>Memperbaiki bug dan meningkatkan performa.</li>
+                    <li>Analitik anonim untuk pengembangan lebih lanjut.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">3. Keamanan</h3>
+                <p>Kami menghargai kepercayaan Anda dalam memberikan informasi kepada kami, oleh karena itu kami berupaya menggunakan cara yang dapat diterima secara komersial untuk melindunginya.</p>
+
+                <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">4. Hubungi Developer</h3>
+                <p>Jika Anda memiliki pertanyaan tentang Kebijakan Privasi untuk project <strong>{project.title}</strong> ini, silakan hubungi:</p>
+                <div class="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800 mt-4">
+                    <ul class="space-y-3 font-mono text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="text-neutral-500 w-20">Email:</span>
+                            <a href="mailto:rmfhdofficial@gmail.com" class="text-cyan-400 hover:text-white transition-colors">rmfhdofficial@gmail.com</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-neutral-500 w-20">WhatsApp:</span>
+                            <span class="text-white">+62 858-6056-5852</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

@@ -1,0 +1,106 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+// 1. GENERATE HALAMAN (SSG)
+export async function getStaticPaths() {
+  try {
+    // Ambil SEMUA data project dari CMS
+    const res = await fetch('http://localhost:8003/api/projects');
+    const projects = await res.json();
+
+    // Astro akan bikin halaman HTML buat tiap project
+    return projects.map((project: any) => ({
+      params: { slug: project.slug },
+      props: { project },
+    }));
+  } catch (error) {
+    console.error("Error build project detail:", error);
+    return [];
+  }
+}
+
+// 2. TERIMA DATA
+const { project } = Astro.props;
+
+// Helper format Rupiah
+const formatRupiah = (angka: any) => {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka || 0);
+}
+---
+
+<Layout title={`${project.title} | Detail Proyek`}>
+    <main class="min-h-screen flex flex-col items-center px-6 relative overflow-hidden bg-neutral-950 text-neutral-300 pb-32">
+        <div class="fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div class="fixed inset-0 z-0 bg-[radial-gradient(circle_800px_at_50%_-30%,#1e1e2e,transparent)]"></div>
+
+        <div class="max-w-5xl w-full z-10 space-y-12 pt-12 md:pt-24">
+            
+            <a href="/" class="inline-flex items-center gap-2 text-sm text-cyan-500 hover:text-cyan-400 transition-colors group font-mono">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                KEMBALI KE BERANDA
+            </a>
+
+            <div class="space-y-4 border-b border-neutral-800 pb-8">
+                <div class="flex items-center gap-3">
+                    <span class={`px-3 py-1 rounded-full border text-xs font-mono uppercase ${project.type === 'ai' ? 'border-purple-500/30 bg-purple-900/10 text-purple-400' : 'border-cyan-500/30 bg-cyan-900/10 text-cyan-400'}`}>
+                        {project.type === 'ai' ? 'GENERATIVE AI' : 'WEB & MOBILE APP'}
+                    </span>
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="text-xs text-green-500 font-mono tracking-widest">ONLINE / READY</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight">{project.title}</h1>
+                
+                <div class="w-full aspect-video rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 mt-6 shadow-2xl shadow-cyan-900/10 relative group">
+                    <img src={project.image} alt={project.title} class="w-full h-full object-cover" />
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2 space-y-10">
+                    <section class="space-y-4">
+                        <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
+                            <span class="w-1 h-6 bg-cyan-500 rounded-full"></span>
+                            DESKRIPSI PROYEK
+                        </h2>
+                        <div class="leading-relaxed text-neutral-400 prose prose-invert max-w-none prose-a:text-cyan-400 prose-headings:text-white prose-strong:text-white" set:html={project.description}></div>
+                    </section>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-900/10 to-neutral-900/50 relative overflow-hidden">
+                        <h3 class="text-sm font-bold text-cyan-400 font-tech mb-4 uppercase tracking-wider relative z-10">INFO PROYEK</h3>
+                        
+                        {project.price && project.price > 0 && (
+                            <div class="space-y-1 mb-6 relative z-10">
+                                <div class="text-xs text-neutral-500">Estimasi Harga / Nilai</div>
+                                <div class="text-2xl md:text-3xl font-bold text-white">{formatRupiah(project.price)}</div>
+                            </div>
+                        )}
+
+                        <div class="space-y-3 relative z-10">
+                            {project.link && (
+                                <a href={project.link} target="_blank" class="block w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-center rounded-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]">
+                                    LIHAT DEMO / LINK
+                                </a>
+                            )}
+                            
+                            <a href={`https://wa.me/6285860565852?text=Halo,%20saya%20tertarik%20dengan%20proyek%20${project.title}`} target="_blank" class="block w-full py-3 border border-neutral-700 hover:border-white text-neutral-300 hover:text-white font-bold text-center rounded-xl transition-all">
+                                HUBUNGI SAYA
+                            </a>
+                            
+                            <div class="pt-4 border-t border-neutral-800 text-center">
+                                <a href={`/projects/${project.slug}/privacy-policy`} class="text-xs text-neutral-500 hover:text-cyan-500 underline transition-colors">
+                                    Lihat Kebijakan Privasi (Privacy Policy)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

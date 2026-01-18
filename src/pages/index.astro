@@ -1,166 +1,82 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// --- 1. DATA: PORTOFOLIO (DEV) ---
-const webProjects = [
-  { 
-    title: "Absensi One", 
-    desc: "Sistem presensi modern berbasis Geo-Location & Face Detection.", 
-    tag: "WEB & MOBILE APP" 
-  },
-  { 
-    title: "CBT Client One", 
-    desc: "Aplikasi Ujian Online Anti-Curang (Kiosk Advanced Mode).", 
-    tag: "WEB & MOBILE APP" 
-  },
-  { 
-    title: "Simple Quran", 
-    desc: "Aplikasi Al-Quran digital lengkap dengan kumpulan doa harian.", 
-    tag: "COMING SOON" 
-  },
-  { 
-    title: "WhatsApp Blast", 
-    desc: "Kirim pesan secara massal ke banyak kontak secara otomatis.", 
-    tag: "COMING SOON" 
-  },
-  { 
-    title: "ChickTrack", 
-    desc: "Hitung Ayam Otomatis, Cepat dan Presisi dengan AI.", 
-    tag: "COMING SOON" 
-  },
-];
+// ==============================================
+// 1. CONFIG URL (LOCALHOST PORT 8003)
+// ==============================================
+// Ini harus sama persis dengan alamat di terminal Laravel Anda
+const API_URL = "http://127.0.0.1:8003"; 
 
-// --- 2. DATA: PORTOFOLIO (AI) ---
-const aiProjects = [
-  { 
-    title: "K-Drama", 
-    desc: "Library Prompt Engineering untuk visualisasi realisme artis Korea.", 
-    tag: "GENERATIVE AI" 
-  },
-  { 
-    title: "MCU", 
-    desc: "Library Prompt Engineering untuk visualisasi karakter Marvel Cinematic Universe.", 
-    tag: "GENERATIVE AI" 
-  },
-];
+// ==============================================
+// 2. DEFAULT DATA (Fallback)
+// ==============================================
+// Data ini hanya muncul jika Astro GAGAL menghubungi Laravel
+let profile = {
+    name: "Ridwan Maulana, S.Kom.",
+    description: "Saya seorang Web & Mobile Developer sekaligus Guru Informatika yang menjembatani dunia teknologi dan pendidikan.",
+    quote: '"Developer by practice, educator by purpose."',
+    image: "https://placehold.co/400", 
+    whatsapp: "6285860565852",
+    email: "rmfhdofficial@gmail.com"
+};
 
-// --- 3. DATA: BISNIS ---
-const business = [
-  { 
-    title: "One Computer & Dev", 
-    desc: "Toko kami bergerak di bidang Jual Beli (Komputer, Laptop, Aksesoris), Jasa Service, Pembuatan Website & Aplikasi, serta Konsultasi IT (Gratis).", 
-    tag: "IT SOLUTIONS & SERVICES",
-    link: "/business/one-computer" // Link menuju halaman bisnis
-  },
-];
+let webProjects = [];
+let aiProjects = [];
+let business = [];
+let experience = [];
+let education = [];
+let certificates = [];
+let trainings = [];
+let techGroups = [];
 
-// --- 4. DATA: RIWAYAT KARIR ---
-const experience = [
-  {
-    period: "2025 — SEKARANG",
-    role: "Owner & IT Consultant",
-    company: "One Computer & Dev",
-    desc: "Mengelola operasional bisnis solusi IT, jual beli komputer, jasa service, pembuatan web & aplikasi, serta konsultasi IT"
-  },
-  {
-    period: "2025 — SEKARANG",
-    role: "Guru Informatika",
-    company: "SMP Negeri 1 Bantarkalong",
-    desc: "Membentuk fondasi literasi digital dan computational thinking bagi siswa."
-  },
-  {
-    period: "2023 — 2024",
-    role: "Staf IT",
-    company: "PT BPR Cipatujah Jabar (Bank CiJ)",
-    desc: "Mengelola dan maintenance infrastruktur IT perbankan."
-  },
-  {
-    period: "2021 — 2022",
-    role: "Guru Informatika",
-    company: "SMK Muhammadiyah Kota Tasikmalaya",
-    desc: "Mengajar produktif Teknik Komputer Jaringan dan pengembangan kurikulum berbasis industri."
+// ==============================================
+// 3. FETCH DATA (Server Side)
+// ==============================================
+try {
+  console.log(`[ASTRO] Menghubungi CMS di: ${API_URL}/api/content`);
+
+  const resContent = await fetch(`${API_URL}/api/content`);
+  
+  if (!resContent.ok) {
+      throw new Error(`Gagal Fetch! Status: ${resContent.status}`);
   }
-];
+  
+  const content = await resContent.json();
+  console.log("[ASTRO] BERHASIL! Data diterima.");
 
-// --- 5. DATA: PENDIDIKAN (DIPERBARUI) ---
-const education = [
-  {
-    campus: "Universitas Pendidikan Indonesia",
-    degree: "Guru Profesional (Gr.)",
-    major: "Sekolah Pascasarjana",
-    period: "2025 — 2026",
-    highlights: [
-      "IPK: Coming Soon",
-      "Predikat: Coming Soon",
-      "Fokus: Informatika"
-    ]
-  },
-  {
-    campus: "Universitas Siliwangi",
-    degree: "Sarjana Komputer (S.Kom.)",
-    major: "Informatika",
-    period: "2016 — 2020",
-    highlights: [
-      "IPK: 3.58 / 4.00",
-      "Predikat: Mahasiswa Tercepat",
-      "Fokus: Sistem Teknologi Informasi"
-    ]
+  // --- UPDATE DATA PROFIL ---
+  if (content.profile) {
+      profile = {
+          ...content.profile,
+          // Logic Gambar Pintar:
+          // Cek apakah URL dari API sudah lengkap (http://...) atau belum
+          image: content.profile.image.startsWith('http') 
+              ? content.profile.image 
+              : `${API_URL}/storage/${content.profile.image}`
+      };
   }
-];
 
-// --- 6. DATA: SERTIFIKASI & PELATIHAN ---
-const certificates = [
-  { title: "NETWORK ADMINISTRATOR", issuer: "PT. Netkrom Solusindo" },
-  { title: "PROGRAM ANALYST", issuer: "Badan Nasional Sertifikasi Profesi" },
-  { title: "JUNIOR WEB DEVELOPER", issuer: "Badan Nasional Sertifikasi Profesi" },
-  { title: "JUNIOR OFFICE OPERATOR", issuer: "Badan Nasional Sertifikasi Profesi" },
-  { title: "JUNIOR WEB PROGRAMMER", issuer: "Badan Nasional Sertifikasi Profesi" },
-  { title: "JUNIOR GRAPHIC DESIGNER", issuer: "Badan Nasional Sertifikasi Profesi" }
-];
-
-const trainings = [
-  { title: "Junior Network Administrator", issuer: "BPPTIK Kementerian Komunikasi dan Informatika" },
-  { title: "Junior Web Developer", issuer: "BPPTIK Kementerian Komunikasi dan Informatika" },
-  { title: "Junior Office Application", issuer: "BPPTIK Kementerian Komunikasi dan Informatika" },
-  { title: "Programming with Python", issuer: "Kementerian Komunikasi dan Digital Republik Indonesia" },
-  { title: "IT FUNDAMENTALS", issuer: "Kementerian Komunikasi dan Digital Republik Indonesia" }, 
-  { title: "Online Course Microsoft IV", issuer: "Microsoft Virtual Education Academy" },
-  { title: "Mengamankan Diri dari Kejahatan Siber", issuer: "Pusat Pengembangan Literasi Digital" },
-  { title: "Media Digital bagi Guru/Tenaga Kependidikan", issuer: "Pusat Pengembangan Literasi Digital" },
-  { title: "Cara Mudah Menggunakan Aplikasi Perkantoran Online", issuer: "Pusat Pengembangan Literasi Digital" },
-  { title: "Dasar-dasar Keamanan AI", issuer: "Pusbang Ekosistem SDM Komdigi" }
-];
-
-// --- 7. DATA: KEAHLIAN (KATEGORI) ---
-const techGroups = [
-  {
-    category: "MULTI-PLATFORM DEV",
-    desc: "Pengembangan Aplikasi Web & Mobile.",
-    skills: ["Laravel (PHP)", "Flutter (Mobile)", "Astro Framework", "Bootstrap", "REST API"]
-  },
-  {
-    category: "INFRASTRUCTURE",
-    desc: "Manajemen Server & Jaringan.",
-    skills: ["Linux Server", "Cloudflare Ecosystem", "Networking (LAN/WiFi)", "Web Security"]
-  },
-  {
-    category: "HARDWARE & SUPPORT",
-    desc: "Teknis Perangkat Keras Komputer.",
-    skills: ["PC Assembly / Build", "Hardware Troubleshooting", "Maintenance System"]
-  },
-  {
-    category: "OFFICE & ADMIN",
-    desc: "Pengolahan Dokumen & Data Perkantoran.",
-    skills: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint"]
-  },
-  {
-    category: "FUTURE TECH",
-    desc: "Kecerdasan Buatan & Data.",
-    skills: ["Python (Basic)", "Prompt Engineering", "AI Integration"]
+  // --- UPDATE DATA PROJECT ---
+  // Kita ambil dari endpoint /content karena sudah Anda gabungkan di API Laravel
+  if (content.projects && Array.isArray(content.projects)) {
+      webProjects = content.projects.filter((p: any) => p.type === 'dev');
+      aiProjects = content.projects.filter((p: any) => p.type === 'ai');
   }
-];
 
-// --- 8. DATA: SOSIAL MEDIA ---
+  // --- UPDATE DATA LAINNYA ---
+  if (content.business?.length > 0) business = content.business;
+  if (content.experience?.length > 0) experience = content.experience;
+  if (content.education?.length > 0) education = content.education;
+  if (content.certificates?.length > 0) certificates = content.certificates;
+  if (content.trainings?.length > 0) trainings = content.trainings;
+  if (content.skills?.length > 0) techGroups = content.skills;
+
+} catch (error) {
+  console.error(">>> ERROR DI ASTRO:", error);
+  console.error(`>>> Pastikan Laravel berjalan: php artisan serve --port=8003`);
+}
+
+// --- DATA STATIS (SOSMED) ---
 const socialLinks = [
   { name: "GitHub", url: "https://github.com/hirridwan", icon: "M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" },
   { name: "LinkedIn", url: "https://linkedin.com/in/rmfhdofficial", icon: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" },
@@ -169,7 +85,7 @@ const socialLinks = [
 ];
 ---
 
-<Layout title="Ridwan Maulana, S.Kom. | Portofolio">
+<Layout title={`${profile.name} | Portofolio`}>
     
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-fit px-4">
         <ul class="flex items-center gap-1 md:gap-4 px-5 py-3 rounded-full bg-neutral-900/90 backdrop-blur-md border border-neutral-800 shadow-2xl overflow-x-auto no-scrollbar whitespace-nowrap">
@@ -194,8 +110,8 @@ const socialLinks = [
                     <div class="absolute inset-0 bg-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
                     <div class="relative w-full h-full rounded-2xl border-2 border-neutral-800 bg-neutral-900 overflow-hidden group-hover:border-cyan-500/50 transition-colors duration-500">
                         <img 
-                            src="https://i.imgur.com/qyr0yAY.png" 
-                            alt="Ridwan Maulana Profil"
+                            src={profile.image} 
+                            alt={profile.name}
                             class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-500"
                         />
                     </div>
@@ -211,27 +127,27 @@ const socialLinks = [
                         <p class="text-xl md:text-2xl font-bold text-white mb-1">Hi! Saya,</p>
                         <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 inline-block whitespace-nowrap">
-                                Ridwan Maulana, S.Kom.
+                                {profile.name}
                             </span>
                         </h1>
                     </div>
                     
                     <p class="text-lg text-neutral-400 max-w-2xl leading-relaxed border-l-2 border-neutral-800 pl-6 mb-6">
-                        Saya seorang <strong>Web & Mobile Developer</strong> sekaligus <strong>Guru Informatika</strong> yang menjembatani dunia teknologi dan pendidikan.
+                        {profile.description}
                     </p>
 
                     <div class="pl-6 mb-2">
                         <p class="text-lg md:text-xl font-mono italic text-white/90">
                            <span class="text-cyan-500 not-italic mr-2">~</span>
-                           "Developer by practice, <br class="sm:hidden"> educator by purpose."
+                           {profile.quote}
                         </p>
                    </div>
                    <div class="flex flex-wrap gap-4 pt-4">
-                        <a href="https://wa.me/6285860565852" target="_blank" class="group relative px-5 py-2.5 bg-white text-black text-sm font-bold rounded-lg overflow-hidden flex items-center gap-2 transition-all hover:scale-105">
+                        <a href={`https://wa.me/${profile.whatsapp}`} target="_blank" class="group relative px-5 py-2.5 bg-white text-black text-sm font-bold rounded-lg overflow-hidden flex items-center gap-2 transition-all hover:scale-105">
                             <div class="absolute inset-0 w-full h-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg"></div>
                             <span class="relative z-10 uppercase tracking-wider">WhatsApp Saya</span>
                         </a>
-                        <a href="mailto:rmfhdofficial@gmail.com" class="px-5 py-2.5 border border-neutral-300 text-neutral-300 text-sm font-bold rounded-lg hover:border-white hover:text-white transition-all hover:scale-105 uppercase tracking-wider">
+                        <a href={`mailto:${profile.email}`} class="px-5 py-2.5 border border-neutral-300 text-neutral-300 text-sm font-bold rounded-lg hover:border-white hover:text-white transition-all hover:scale-105 uppercase tracking-wider">
                             Email Saya
                         </a>
                     </div>
@@ -245,51 +161,56 @@ const socialLinks = [
                         <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                     </div>
                     <h3 class="text-sm font-mono text-cyan-500 uppercase tracking-widest pl-1">>> 1.1 DEV PROJECT</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {webProjects.map((project) => {
-                            let linkUrl = "#";
-                            let isClickable = false;
-                            if (project.title === "Absensi One") { linkUrl = "/projects/absensi-one"; isClickable = true; }
-                            else if (project.title === "CBT Client One") { linkUrl = "/projects/cbt-client-one"; isClickable = true; }
-
-                            return (
-                                <a href={linkUrl} class={`group relative p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:scale-[1.02] hover:border-cyan-500/30 flex flex-col h-full justify-between gap-6 ${isClickable ? "cursor-pointer" : "cursor-default"}`}>
+                    
+                    {webProjects.length === 0 ? (
+                        <p class="text-neutral-500 italic p-4 text-center border border-dashed border-neutral-800 rounded">Belum ada data project di CMS.</p>
+                    ) : (
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {webProjects.map((project: any) => (
+                                <a href={`/projects/${project.slug}`} class="group relative p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:scale-[1.02] hover:border-cyan-500/30 flex flex-col h-full justify-between gap-6 cursor-pointer">
                                     <div>
+                                        <div class="w-full h-40 mb-4 rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800">
+                                            <img src={project.image} alt={project.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        </div>
                                         <h3 class="text-xl font-bold text-neutral-200 group-hover:text-cyan-400 mb-2">{project.title}</h3>
-                                        <p class="text-sm text-neutral-500 leading-relaxed">{project.desc}</p>
+                                        <p class="text-sm text-neutral-500 leading-relaxed line-clamp-3">
+                                            {project.description ? project.description.replace(/<[^>]*>?/gm, '') : 'Tidak ada deskripsi.'}
+                                        </p>
                                     </div>
                                     <div class="flex justify-between items-center border-t border-neutral-800 pt-4">
-                                        <span class="text-[10px] font-mono text-cyan-600 uppercase tracking-wider border border-cyan-900/30 bg-cyan-900/10 px-2 py-1 rounded">{project.tag}</span>
-                                        {isClickable && (
-                                            <span class="text-[10px] font-bold text-cyan-500 group-hover:underline flex items-center gap-1">Detail <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></span>
-                                        )}
+                                        <span class="text-[10px] font-mono text-cyan-600 uppercase tracking-wider border border-cyan-900/30 bg-cyan-900/10 px-2 py-1 rounded">WEB & APP</span>
+                                        <span class="text-[10px] font-bold text-cyan-500 group-hover:underline flex items-center gap-1">Detail -></span>
                                     </div>
                                 </a>
-                            );
-                        })}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
                 
-                <div class="space-y-6">
-                    <h3 class="text-sm font-mono text-purple-500 uppercase tracking-widest pl-1">>> 1.2 AI PROJECT</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {aiProjects.map((project) => (
-                            <a href="https://rmfhd.my.id" class="group relative p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:scale-[1.02] hover:border-purple-500/30 flex flex-col h-full justify-between gap-6 cursor-pointer">
-                                <div>
-                                    <h3 class="text-xl font-bold text-neutral-200 group-hover:text-purple-400 mb-2">{project.title}</h3>
-                                    <p class="text-sm text-neutral-500 leading-relaxed">{project.desc}</p>
-                                </div>
-                                <div class="flex justify-between items-center border-t border-neutral-800 pt-4">
-                                    <span class="text-[10px] font-mono text-purple-600 uppercase tracking-wider border border-purple-900/30 bg-purple-900/10 px-2 py-1 rounded">{project.tag}</span>
-                                    <span class="text-[10px] font-bold text-purple-500 group-hover:underline flex items-center gap-1">
-                                        Detail 
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                                    </span>
-                                </div>
-                            </a>
-                        ))}
+                {aiProjects.length > 0 && (
+                    <div class="space-y-6">
+                        <h3 class="text-sm font-mono text-purple-500 uppercase tracking-widest pl-1">>> 1.2 AI PROJECT</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {aiProjects.map((project: any) => (
+                                <a href={`/projects/${project.slug}`} class="group relative p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:scale-[1.02] hover:border-purple-500/30 flex flex-col h-full justify-between gap-6 cursor-pointer">
+                                    <div>
+                                         <div class="w-full h-40 mb-4 rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800">
+                                            <img src={project.image} alt={project.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        </div>
+                                        <h3 class="text-xl font-bold text-neutral-200 group-hover:text-purple-400 mb-2">{project.title}</h3>
+                                        <p class="text-sm text-neutral-500 leading-relaxed line-clamp-3">
+                                            {project.description ? project.description.replace(/<[^>]*>?/gm, '') : 'Tidak ada deskripsi.'}
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between items-center border-t border-neutral-800 pt-4">
+                                        <span class="text-[10px] font-mono text-purple-600 uppercase tracking-wider border border-purple-900/30 bg-purple-900/10 px-2 py-1 rounded">GENERATIVE AI</span>
+                                        <span class="text-[10px] font-bold text-purple-500 group-hover:underline flex items-center gap-1">Detail -></span>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </section>
 
             <section id="business" class="scroll-mt-32">
@@ -298,14 +219,14 @@ const socialLinks = [
                     <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 </div>
                 <div class="grid grid-cols-1 gap-6">
-                    {business.map((biz) => (
-                        <a href={biz.link} class="p-8 rounded-xl border border-green-500/20 bg-green-900/10 relative overflow-hidden group hover:border-green-500/40 transition-colors block">
+                    {business.map((biz: any) => (
+                        <a href={biz.link || '#'} class="p-8 rounded-xl border border-green-500/20 bg-green-900/10 relative overflow-hidden group hover:border-green-500/40 transition-colors block">
                             <div class="relative z-10">
                                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
                                     <h3 class="text-2xl font-bold text-white group-hover:text-green-400 transition-colors">{biz.title}</h3>
                                     <span class="text-[10px] font-mono text-green-400 border border-green-500/30 bg-green-500/10 px-2 py-1 rounded">{biz.tag}</span>
                                 </div>
-                                <p class="text-neutral-300 leading-relaxed max-w-2xl text-lg mb-6">{biz.desc}</p>
+                                <p class="text-neutral-300 leading-relaxed max-w-2xl text-lg mb-6">{biz.description}</p>
                                 <span class="text-xs font-bold text-green-500 group-hover:underline flex items-center gap-2">
                                     Lihat Detail Bisnis 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
@@ -313,6 +234,7 @@ const socialLinks = [
                             </div>
                         </a>
                     ))}
+                    {business.length === 0 && <p class="text-neutral-500 italic">Belum ada data bisnis.</p>}
                 </div>
             </section>
 
@@ -322,7 +244,7 @@ const socialLinks = [
                     <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 </div>
                 <div class="space-y-0 border-l border-neutral-800 ml-3">
-                    {experience.map((job) => (
+                    {experience.map((job: any) => (
                         <div class="relative pl-8 pb-10 last:pb-0 group">
                             <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-neutral-800 group-hover:bg-cyan-400 transition-colors border border-neutral-950"></div>
                             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
@@ -330,9 +252,10 @@ const socialLinks = [
                                 <span class="text-xs font-mono text-cyan-600 bg-cyan-900/10 px-2 py-1 rounded border border-cyan-900/30">{job.period}</span>
                             </div>
                             <div class="text-sm font-tech text-neutral-500 mb-2 uppercase tracking-wide">{job.company}</div>
-                            <p class="text-sm text-neutral-400 leading-relaxed max-w-2xl">{job.desc}</p>
+                            <p class="text-sm text-neutral-400 leading-relaxed max-w-2xl">{job.description}</p>
                         </div>
                     ))}
+                    {experience.length === 0 && <p class="text-neutral-500 italic pl-8">Belum ada riwayat karir.</p>}
                 </div>
             </section>
 
@@ -343,7 +266,7 @@ const socialLinks = [
                 </div>
                 
                 <div class="space-y-6">
-                    {education.map((edu) => (
+                    {education.map((edu: any) => (
                         <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20 relative overflow-hidden group hover:border-blue-500/30 transition-all">
                             <div class="flex flex-col md:flex-row justify-between items-start gap-4">
                                 <div>
@@ -353,7 +276,7 @@ const socialLinks = [
                                 <span class="text-xs font-mono text-neutral-500 bg-neutral-800/50 px-2 py-1 rounded border border-neutral-700">{edu.period}</span>
                             </div>
                             <div class="mt-6 flex flex-wrap gap-3">
-                                {edu.highlights.map((point) => (
+                                {Array.isArray(edu.highlights) && edu.highlights.map((point: string) => (
                                     <div class="flex items-center gap-2 px-3 py-1 rounded-md bg-neutral-800/50 border border-neutral-700 text-xs text-neutral-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
                                         {point}
@@ -362,6 +285,7 @@ const socialLinks = [
                             </div>
                         </div>
                     ))}
+                    {education.length === 0 && <p class="text-neutral-500 italic">Belum ada data pendidikan.</p>}
                 </div>
             </section>
 
@@ -374,7 +298,7 @@ const socialLinks = [
                     
                     <h3 class="text-sm font-mono text-yellow-500 uppercase tracking-widest pl-1">>> 5.1 SERTIFIKASI PROFESI</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {certificates.map((cert) => (
+                        {certificates.map((cert: any) => (
                             <div class="p-4 rounded border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-800/50 hover:border-yellow-500/30 transition-all group">
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-neutral-500 group-hover:text-yellow-400">
@@ -389,10 +313,11 @@ const socialLinks = [
                         ))}
                     </div>
                 </div>
+                
                 <div class="space-y-6">
                     <h3 class="text-sm font-mono text-cyan-500 uppercase tracking-widest pl-1">>> 5.2 PELATIHAN TEKNIS</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {trainings.map((train) => (
+                        {trainings.map((train: any) => (
                             <div class="p-4 rounded border border-neutral-800 bg-neutral-900/30 hover:bg-neutral-800/50 hover:border-cyan-500/30 transition-all group">
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 w-8 h-8 rounded bg-neutral-800 flex items-center justify-center text-neutral-500 group-hover:text-cyan-400">
@@ -415,21 +340,22 @@ const socialLinks = [
                     <div class="h-[1px] bg-neutral-800 flex-grow"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {techGroups.map((group) => (
+                    {techGroups.map((group: any) => (
                         <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20 hover:border-cyan-500/30 hover:bg-neutral-900/40 transition-all group">
                             <div class="mb-4">
                                 <h3 class="text-base font-bold text-white font-tech tracking-wider flex items-center gap-2 mb-1 group-hover:text-cyan-400 transition-colors">
                                     <span class="w-1.5 h-4 bg-cyan-500 rounded-sm"></span> {group.category}
                                 </h3>
-                                <p class="text-xs text-neutral-500 ml-3.5">{group.desc}</p>
+                                <p class="text-xs text-neutral-500 ml-3.5">{group.description}</p>
                             </div>
                             <div class="flex flex-wrap gap-2 ml-3.5">
-                                {group.skills.map(skill => (
+                                {Array.isArray(group.items) && group.items.map((skill: string) => (
                                     <span class="px-3 py-1 bg-black/50 border border-neutral-800 rounded text-[11px] text-neutral-400 font-tech hover:text-white hover:border-cyan-500/50 hover:bg-cyan-900/10 transition-colors cursor-default">{skill}</span>
                                 ))}
                             </div>
                         </div>
                     ))}
+                    {techGroups.length === 0 && <p class="text-neutral-500 italic">Belum ada data keahlian.</p>}
                 </div>
             </section>
 
@@ -437,8 +363,8 @@ const socialLinks = [
                 <div class="flex flex-col gap-4">
                     <div class="flex flex-col gap-1">
                         <span class="text-white font-bold uppercase font-tech tracking-wider mb-2">Kontak Saya</span>
-                        <span>Email: rmfhdofficial@gmail.com</span>
-                        <span>WA: +62 858-6056-5852</span>
+                        <span>Email: {profile.email}</span>
+                        <span>WA: +{profile.whatsapp}</span>
                     </div>
 
                     <div class="flex gap-4 mt-2">
@@ -453,7 +379,7 @@ const socialLinks = [
                 </div>
 
                 <div class="text-right md:self-end">
-                    <p>&copy; 2025 RIDWAN MAULANA</p>
+                    <p>&copy; 2025 {profile.name.split(',')[0].toUpperCase()}</p>
                     <p class="text-xs opacity-50 font-tech uppercase">System Online // Ver 1.0</p>
                 </div>
             </footer>
