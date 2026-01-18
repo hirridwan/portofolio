@@ -6,14 +6,13 @@ import Layout from '../../../layouts/Layout.astro';
 // ==============================================
 export async function getStaticPaths() {
   try {
-    // ⚠️ PENTING: Gunakan 127.0.0.1:8003 dan endpoint /content
+    // Ambil data dari API Laravel (Localhost Port 8003)
     const res = await fetch('http://127.0.0.1:8003/api/content');
     const data = await res.json();
     
-    // Ambil array 'projects' dari dalam JSON response
+    // Pastikan kita mengambil array projects
     const projects = data.projects || [];
 
-    // Buat halaman untuk setiap project
     return projects.map((project: any) => ({
       params: { slug: project.slug },
       props: { project },
@@ -26,11 +25,19 @@ export async function getStaticPaths() {
 }
 
 // ==============================================
-// 2. AMBIL DATA PROJECT
+// 2. DEFINISI TIPE DATA (SOLUSI MERAH-MERAH)
+// ==============================================
+// Ini memberitahu VS Code bahwa 'project' itu ada dan tipe datanya bebas (any)
+interface Props {
+  project: any;
+}
+
+// ==============================================
+// 3. AMBIL DATA DARI PROPS
 // ==============================================
 const { project } = Astro.props;
 
-// Tanggal update otomatis (saat build)
+// Membuat tanggal otomatis (Hari ini)
 const lastUpdated = new Date().toLocaleDateString('id-ID', { 
     year: 'numeric', 
     month: 'long', 
@@ -64,33 +71,34 @@ const lastUpdated = new Date().toLocaleDateString('id-ID', {
                 <p>
                     Aplikasi <strong>{project.title}</strong> dirancang dengan mengutamakan privasi pengguna. 
                     {project.type === 'ai' 
-                        ? 'Karena aplikasi ini berbasis Artificial Intelligence, data input mungkin diproses untuk menghasilkan output, namun kami tidak menyimpan data pribadi sensitif Anda.' 
-                        : 'Kami tidak mengumpulkan data pribadi secara spesifik kecuali informasi teknis dasar yang diperlukan agar aplikasi berjalan dengan lancar.'
+                        ? 'Karena aplikasi ini berbasis Artificial Intelligence, data input mungkin diproses untuk menghasilkan output yang relevan, namun kami berkomitmen untuk tidak menyimpan data pribadi sensitif Anda tanpa izin.' 
+                        : 'Kami tidak mengumpulkan data pribadi secara spesifik kecuali informasi teknis dasar yang diperlukan agar aplikasi berjalan dengan lancar (seperti log error).'
                     }
                 </p>
 
                 <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">2. Penggunaan Data</h3>
                 <p>Setiap data yang diproses oleh <strong>{project.title}</strong> digunakan semata-mata untuk:</p>
                 <ul class="list-disc list-inside ml-4 space-y-2">
-                    <li>Menyediakan fitur utama aplikasi.</li>
-                    <li>Memperbaiki bug dan meningkatkan performa.</li>
-                    <li>Analitik anonim untuk pengembangan lebih lanjut.</li>
+                    <li>Menyediakan fitur utama aplikasi agar berfungsi sebagaimana mestinya.</li>
+                    <li>Memperbaiki bug, error, dan meningkatkan performa sistem.</li>
+                    <li>Analitik anonim untuk pengembangan fitur lebih lanjut.</li>
                 </ul>
 
                 <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">3. Keamanan</h3>
-                <p>Kami menghargai kepercayaan Anda dalam memberikan informasi kepada kami, oleh karena itu kami berupaya menggunakan cara yang dapat diterima secara komersial untuk melindunginya.</p>
+                <p>Kami menghargai kepercayaan Anda dalam menggunakan layanan kami. Kami berupaya menggunakan standar keamanan industri terbaik untuk melindungi data Anda dari akses yang tidak sah.</p>
 
                 <h3 class="text-xl font-bold text-white mt-8 border-l-4 border-cyan-500 pl-4">4. Hubungi Developer</h3>
-                <p>Jika Anda memiliki pertanyaan tentang Kebijakan Privasi untuk project <strong>{project.title}</strong> ini, silakan hubungi:</p>
+                <p>Jika Anda memiliki pertanyaan lebih lanjut tentang Kebijakan Privasi untuk project <strong>{project.title}</strong> ini, silakan hubungi kami:</p>
+                
                 <div class="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800 mt-4">
                     <ul class="space-y-3 font-mono text-sm">
                         <li class="flex items-center gap-3">
-                            <span class="text-neutral-500 w-20">Email:</span>
+                            <span class="text-neutral-500 w-24">Email:</span>
                             <a href="mailto:rmfhdofficial@gmail.com" class="text-cyan-400 hover:text-white transition-colors">rmfhdofficial@gmail.com</a>
                         </li>
                         <li class="flex items-center gap-3">
-                            <span class="text-neutral-500 w-20">WhatsApp:</span>
-                            <span class="text-white">+62 858-6056-5852</span>
+                            <span class="text-neutral-500 w-24">WhatsApp:</span>
+                            <a href="https://wa.me/6285860565852" target="_blank" class="text-white hover:text-green-400 transition-colors">+62 858-6056-5852</a>
                         </li>
                     </ul>
                 </div>
