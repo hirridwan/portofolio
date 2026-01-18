@@ -1,14 +1,19 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 
-// 1. GENERATE HALAMAN (SSG)
+// ==============================================
+// 1. GENERATE HALAMAN DINAMIS (SSG)
+// ==============================================
 export async function getStaticPaths() {
   try {
-    // Ambil SEMUA data project dari CMS
-    const res = await fetch('http://localhost:8003/api/projects');
-    const projects = await res.json();
+    // Ambil data dari API Laravel (Endpoint utama)
+    const res = await fetch('http://127.0.0.1:8003/api/content');
+    const data = await res.json();
+    
+    // Ambil array projects dari dalam response
+    const projects = data.projects || [];
 
-    // Astro akan bikin halaman HTML buat tiap project
+    // Astro akan membuat halaman HTML untuk setiap slug project
     return projects.map((project: any) => ({
       params: { slug: project.slug },
       props: { project },
@@ -19,7 +24,16 @@ export async function getStaticPaths() {
   }
 }
 
-// 2. TERIMA DATA
+// ==============================================
+// 2. DEFINISI TIPE DATA (Bungkam Error Merah)
+// ==============================================
+interface Props {
+  project: any;
+}
+
+// ==============================================
+// 3. TERIMA DATA
+// ==============================================
 const { project } = Astro.props;
 
 // Helper format Rupiah
@@ -30,6 +44,7 @@ const formatRupiah = (angka: any) => {
 
 <Layout title={`${project.title} | Detail Proyek`}>
     <main class="min-h-screen flex flex-col items-center px-6 relative overflow-hidden bg-neutral-950 text-neutral-300 pb-32">
+        
         <div class="fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         <div class="fixed inset-0 z-0 bg-[radial-gradient(circle_800px_at_50%_-30%,#1e1e2e,transparent)]"></div>
 
@@ -60,6 +75,7 @@ const formatRupiah = (angka: any) => {
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
                 <div class="lg:col-span-2 space-y-10">
                     <section class="space-y-4">
                         <h2 class="text-xl font-bold text-white font-tech flex items-center gap-2">
